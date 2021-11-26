@@ -1,25 +1,38 @@
+#ifndef _CGAME_H_
+#define _CGAME_H_
+
+#include "CTRAFFIC_LIGHT.h"
+#include "CTRUCK.h"
+#include "CVEHICLE.h"
+#include "winnt.h"
+#include <iostream>
+
+using namespace std;
+
 class CGAME{
     public:
-        CGAME(); //Chuẩn bị dữ liệu cho tất cả các đối tượng
-        void drawGame(); //Thực hiện vẽ trò chơi ra màn hình sau khi có dữ liệu
-        ~CGAME(); // Hủy tài nguyên đã cấp phát
-        CPEOPLE getPeople();//Lấy thông tin người
-        CVEHICLE* getVehicle();//Lấy danh sách các xe
-        CANIMAL* getAnimal(); //Lấy danh sách các thú
-        void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
-        void exitGame(HANDLE); // Thực hiện thoát Thread
-        void startGame(); // Thực hiện bắt đầu vào trò chơi
-        void loadGame(istream); // Thực hiện tải lại trò chơi đã lưu
-        void saveGame(istream); // Thực hiện lưu lại dữ liệu trò chơi
-        void pauseGame(HANDLE); // Tạm dừng Thread
-        void resumeGame(HANDLE); //Quay lai Thread
-        void updatePosPeople(char); //Thực hiện điều khiển di chuyển của CPEOPLE
-        void updatePosVehicle(); //Thực hiện cho CTRUCK & CCAR di chuyển
-        void updatePosAnimal();//Thực hiện cho CDINAUSOR & CBIRD di chuyển
+        CGAME(); //Prepare data
+        void drawGame(); //Draw game to screen after getting data
+        ~CGAME(); // Release the memory
+        CPEOPLE getPeople(); // Get people info
+        CVEHICLE* getVehicle(); // Get vehicle info
+        CANIMAL* getAnimal(); // Get animal info
+        void resetGame(); // Reset all data to the initial value
+        void exitGame(HANDLE); // Exit from Thread
+        void startGame(); // Start the game
+        void loadGame(istream); // Load the game
+        void saveGame(istream); // Save the game
+        void pauseGame(HANDLE); // Pause the Thread
+        void resumeGame(HANDLE); // Resume the Thread
+        void updatePosPeople(char); // Movement control
+        void updatePosVehicle(); // Change vehicle Position
+        void updatePosAnimal(); // Change animal position
     private:
         CTRUCK* axt;
         CCAR* axh;
         CDINAUSOR* akl;
         CBIRD* ac;
         CPEOPLE cn;        
-}
+};
+
+#endif

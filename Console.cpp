@@ -13,3 +13,10 @@ void GotoXY(int x, int y) {
     coord.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
+
+void TextColor(int x) //ham to mau
+{
+	HANDLE clr;
+	clr = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(clr, x);
+}

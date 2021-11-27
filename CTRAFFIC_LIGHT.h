@@ -1,3 +1,7 @@
+#ifndef _CTRAFFIC_LIGHT_H_
+#define _CTRAFFIC_LIGHT_H_
+
+
 #define GREY 8
 #define RED 12
 #define GREEN 10
@@ -17,3 +21,5 @@ public:
     void updateState(char ch);
     bool isRed();
 };
+
+#endif

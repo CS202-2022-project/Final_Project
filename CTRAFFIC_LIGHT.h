@@ -17,7 +17,7 @@ private:
 public:
     CTRAFFIC_LIGHT();
     CTRAFFIC_LIGHT(int x, int y , int timeInterval);
-    void run();
+    void increaseTime();
     void draw(char);
     void updateState(char ch);
     bool isRed();

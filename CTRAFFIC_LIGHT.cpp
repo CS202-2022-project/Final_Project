@@ -10,7 +10,7 @@ CTRAFFIC_LIGHT::CTRAFFIC_LIGHT(){
     state = COLOR::green;
     coutingTime = 0;
     timeInterval = 15;
-    m_x = BOARD_X_START + 1; // estimated
+    m_x = X_START + 1; // estimated
     m_y = 2;
 }
 
@@ -18,7 +18,7 @@ CTRAFFIC_LIGHT::CTRAFFIC_LIGHT(int x , int y, int timeInterval){
     m_width = 1;
     m_height = 2;
     state = COLOR::green;
-    m_x = BOARD_X_START + 1; // estimated
+    m_x = X_START + 1; // estimated
     coutingTime = 0;
 
 
@@ -60,7 +60,7 @@ void CTRAFFIC_LIGHT::updateState(char ch){
     TextColor(15); // set text back to white
 }
 
-void CTRAFFIC_LIGHT::run(){
+void CTRAFFIC_LIGHT::increaseTime(){
     coutingTime++;
 
     if(coutingTime > timeInterval){

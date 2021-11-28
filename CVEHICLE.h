@@ -6,10 +6,12 @@
 class CVEHICLE{
 public:
     bool isStop();
-    void updatePos(int, int);
+    void drawTrafficLight(const CTRAFFIC_LIGHT& tLight);
+    bool isHitBorder();
+    virtual void updatePos(int, int);
     virtual void draw();
 protected:
-    int mX, mY;
+    int m_X, m_Y;    // the bottom left point
     int m_width, m_height;
     CTRAFFIC_LIGHT m_trafficlight;
 };

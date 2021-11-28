@@ -7,7 +7,7 @@
 class CCAR : public CVEHICLE{
 public:
     CCAR();
-    CCAR(int y);
+    CCAR(int x, int y);
     void draw(char ch);
 };
 

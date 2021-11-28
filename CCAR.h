@@ -9,6 +9,7 @@ public:
     CCAR();
     CCAR(int x, int y);
     void draw(char ch);
+    void updatePos(int, int);
 };
 
 #endif

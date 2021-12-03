@@ -3,13 +3,16 @@
 #define _CCAR_H_
 
 #include"CVEHICLE.h"
+#include<vector>
 
 class CCAR : public CVEHICLE{
 public:
     CCAR();
     CCAR(int x, int y);
-    void draw(char ch);
-    void updatePos(int, int);
+    void draw(int x, int y);
+    //void updatePos(int, int);
+private:
+    vector<string> sprite ;
 };
 
 #endif

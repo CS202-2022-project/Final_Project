@@ -13,7 +13,12 @@ void CVEHICLE::drawTrafficLight(const CTRAFFIC_LIGHT& tLight){
     this->m_trafficlight.draw(254);
 }
 
-bool CVEHICLE::isHitBorder(){
-    return (m_X == X_START + 1 || m_X + m_width == X_END);
+void CVEHICLE::move(int x, int y){
+    this->mX = x;
+    this->mY = y;
 }
+
+// bool CVEHICLE::isHitBorder(){
+//     return (m_X == X_START + 1 || m_X + m_width == X_END);
+// }
 

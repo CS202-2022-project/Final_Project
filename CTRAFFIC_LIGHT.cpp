@@ -5,45 +5,45 @@
 using namespace std;
 
 CTRAFFIC_LIGHT::CTRAFFIC_LIGHT(){
-    m_width = 1;
-    m_height = 2;
+    mWidth = 1;
+    mHeight = 2;
     state = COLOR::green;
     coutingTime = 0;
     timeInterval = 15;
-    m_x = X_START + 1; // estimated
-    m_y = 2;
+    mX = X_START + 1; // estimated
+    mY = 2;
 }
 
 CTRAFFIC_LIGHT::CTRAFFIC_LIGHT(int x , int y, int timeInterval){
-    m_width = 1;
-    m_height = 2;
+    mWidth = 1;
+    mHeight = 2;
     state = COLOR::green;
-    m_x = X_START + 1; // estimated
+    mX = X_START + 1; // estimated
     coutingTime = 0;
 
 
     this->timeInterval = timeInterval;
-    m_y = y;
-    m_x = x;
+    mY = y;
+    mX = x;
 }
 
 void CTRAFFIC_LIGHT::draw(char ch){ // ch = 254
     TextColor(GRAY);
 
-    GotoXY(m_x, m_y);   // draw light above
+    GotoXY(mX, mY);   // draw light above
     printf("%c",ch);
 
-    GotoXY(m_x, m_y - 1); // draw light below
+    GotoXY(mX, mY - 1); // draw light below
     printf("%c",ch);
 
     if(state == COLOR::red){
         TextColor(RED);
-        GotoXY(m_x, m_y - 1); // paint red 
+        GotoXY(mX, mY - 1); // paint red 
         printf("%c",ch);
     }
     else {
         TextColor(GREEN);
-        GotoXY(m_x, m_y);   //  paint green
+        GotoXY(mX, mY);   //  paint green
         printf("%c",ch);
     }
 }

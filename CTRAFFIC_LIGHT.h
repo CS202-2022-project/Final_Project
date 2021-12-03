@@ -12,8 +12,8 @@ private:
     int state;     // 0:RED OR 1:GREEN
     int coutingTime;
     int timeInterval;
-    int m_x, m_y;
-    int m_width, m_height;
+    int mX, mY;
+    int mWidth, mHeight;
 public:
     CTRAFFIC_LIGHT();
     CTRAFFIC_LIGHT(int x, int y , int timeInterval);

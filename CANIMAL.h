@@ -1,16 +1,19 @@
 #ifndef _CANIMAL_H_
 #define _CANIMAL_H_
+#include<iostream>
+#include<string>
+#include<vector>
+#include<windows.h>
+using namespace std;
 
 class CANIMAL {
 protected:
 	int mX, mY;
+	vector<string> sprite;
 public:
 	CANIMAL();
-	bool isStop();
-	virtual void draw(char) = 0;
-	void Up(int);
-	void Down(int);
-	void right(int);
-	void left(int);
+    void Move(int x, int y);
+	virtual void tell() =0;
+	virtual void draw(int x, int y)=0;
 };
 #endif // !_CANIMAL_H_

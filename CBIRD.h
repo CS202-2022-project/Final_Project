@@ -3,12 +3,9 @@
 #include "CANIMAL.h"
 
 class CBIRD :public CANIMAL {
-private:
-	int m_width, m_height;
 public:
 	CBIRD();
-	void draw(char);
-	void Upheight(int);
-	void Downheight(int);
+	void draw(int x, int y);
+	void tell();
 };
 #endif // !_CBIRD_H_

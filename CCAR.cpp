@@ -8,19 +8,19 @@ using namespace std;
 CCAR::CCAR(){
     mX = 0;
     mY = 0;
-    sprite.push_back("___");
+    sprite.push_back(" ___ ");
     sprite.push_back("/___\\");
 }
 
 CCAR::CCAR(int x, int y){
     mX = x;
     mY = y;
-    sprite.push_back("___");
+    sprite.push_back(" ___ ");
     sprite.push_back("/___\\");
 }
 
 void CCAR::draw(int x, int y){
-    vector<string>::iterator ptr;
+    std::vector<std::string>::iterator ptr;
     for (ptr = sprite.begin(); ptr < sprite.end(); ptr++){
         GotoXY(x,y++);
         cout << *ptr;

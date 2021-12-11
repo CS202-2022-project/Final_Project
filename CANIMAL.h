@@ -4,6 +4,8 @@
 #include<string>
 #include<vector>
 #include<windows.h>
+#include<mmsystem.h>
+#include"console.h"
 using namespace std;
 
 class CANIMAL {

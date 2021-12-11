@@ -9,7 +9,7 @@ public:
     void drawTrafficLight(const CTRAFFIC_LIGHT& tLight);
     //bool isHitBorder();
     void move(int x, int y);
-    virtual void draw();
+    virtual void draw(int x, int y) = 0;
 protected:
     int mX, mY;    // the bottom left point
     // int m_width, m_height;

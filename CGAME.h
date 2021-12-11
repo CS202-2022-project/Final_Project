@@ -3,7 +3,12 @@
 
 #include "CTRAFFIC_LIGHT.h"
 #include "CTRUCK.h"
+#include "CCAR.h"
+#include "CDINAUSOR.h"
+#include "CBIRD.h"
 #include "CVEHICLE.h"
+#include "CPEOPLE.h"
+#include "CANIMAL.h"
 #include "winnt.h"
 #include <iostream>
 
@@ -27,7 +32,9 @@ class CGAME{
         void updatePosPeople(char); // Movement control
         void updatePosVehicle(); // Change vehicle Position
         void updatePosAnimal(); // Change animal position
-    private:
+
+        void testSprite();
+    protected:
         CTRUCK* axt;
         CCAR* axh;
         CDINAUSOR* akl;

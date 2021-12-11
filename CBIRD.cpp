@@ -3,11 +3,11 @@
 // it will cause the error if i draw the first design :((
 CBIRD::CBIRD():CANIMAL(){
     string temp;
-    temp ="__   __";
+    temp ="__ __";
     sprite.push_back(temp);
-    temp= "  | | ";
+    temp= " \\ / ";
     sprite.push_back(temp);
-    temp="   o ";
+    temp="  o  ";
     sprite.push_back(temp);
 }
 /*
@@ -19,7 +19,7 @@ CBIRD::CBIRD():CANIMAL(){
 void CBIRD::draw(int x, int y){
     for(int i=0;i<3;i++)
     {
-        Goto(x,y+i);
+        GotoXY(x,y+i);
         cout<<sprite[i];
     }
 }

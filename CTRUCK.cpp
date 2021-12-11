@@ -7,8 +7,8 @@ using namespace std;
 CTRUCK::CTRUCK(){
     mX = 0;
     mY = 0;
-    sprite.push_back("_____");
-    sprite.push_back("|   |____");
+    sprite.push_back("_____     ");
+    sprite.push_back("|   |____ ");
     sprite.push_back("|        |");
     sprite.push_back("|__o__o__|");
 }
@@ -16,14 +16,14 @@ CTRUCK::CTRUCK(){
 CTRUCK::CTRUCK(int x, int y){
     mX = x;
     mY = y;
-    sprite.push_back("_____");
-    sprite.push_back("|   |____");
+    sprite.push_back("_____     ");
+    sprite.push_back("|   |____ ");
     sprite.push_back("|        |");
     sprite.push_back("|__o__o__|");
 }
 
 void CTRUCK::draw(int x, int y){
-    vector<string>::iterator ptr;
+    vector<std::string>::iterator ptr;
     for (ptr = sprite.begin(); ptr < sprite.end(); ptr++){
         GotoXY(x,y++);
         cout << *ptr;

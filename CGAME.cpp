@@ -1,7 +1,10 @@
 #include "CGAME.h"
 
 CGAME::CGAME() {
-
+    axt = new CTRUCK[10];
+    axh = new CCAR[10];
+    akl = new CDINAUSOR[10];
+    ac = new CBIRD[10];
 }
 
 void CGAME::drawGame() {
@@ -62,4 +65,13 @@ void CGAME::updatePosVehicle() {
 
 void CGAME::updatePosAnimal() {
 
+}
+
+// -------------------------------
+
+void CGAME::testSprite() {
+    axh -> draw(1, 1);
+    axt -> draw(1, 5);
+    ac -> draw(1, 15);
+    akl -> draw(1, 20);
 }

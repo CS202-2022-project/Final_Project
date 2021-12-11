@@ -2,11 +2,11 @@
 
 CDINAUSOR::CDINAUSOR():CANIMAL(){
     string temp;
-    temp ="__";
+    temp ="__   ";
     sprite.push_back(temp);
-    temp= "L_|_";
+    temp= "L_|_ ";
     sprite.push_back(temp);
-    temp="-L__|";
+    temp=" L__|";
     sprite.push_back(temp);
     temp="  I I";
     sprite.push_back(temp);
@@ -15,7 +15,7 @@ CDINAUSOR::CDINAUSOR():CANIMAL(){
 void CDINAUSOR::draw(int x, int y){
 for(int i=0;i<4;i++)
     {
-        Goto(x,y+i);
+        GotoXY(x,y+i);
         cout<<sprite[i];
     }
     

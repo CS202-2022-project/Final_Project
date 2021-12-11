@@ -3,6 +3,7 @@
 #include"Console.h"
 #include<iostream>
 using namespace std;
+
 class CPEOPLE {
 	int mX, mY;
 	bool mState;

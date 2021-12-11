@@ -4,6 +4,7 @@
 
 #include"CVEHICLE.h"
 #include<vector>
+#include<string>
 
 class CCAR : public CVEHICLE{
 public:
@@ -12,7 +13,7 @@ public:
     void draw(int x, int y);
     //void updatePos(int, int);
 private:
-    vector<string> sprite ;
+    std::vector<std::string> sprite ;
 };
 
 #endif

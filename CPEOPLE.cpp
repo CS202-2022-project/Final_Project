@@ -5,7 +5,7 @@ CPEOPLE::CPEOPLE() {
 	mState = true;
 };
 void CPEOPLE::Up(int step) {
-	if (mY == BOARD_STARTY) return;
+	if (mY == Y_START) return;
 	GotoXY(mX, mY);
 	cout << " " << endl;
 	mY -= step;
@@ -13,7 +13,7 @@ void CPEOPLE::Up(int step) {
 	cout << "Y" << endl;
 }
 void CPEOPLE::Left(int step){
-	if (mX == BOARD_STARTX) return;
+	if (mX == X_START) return;
 	GotoXY(mX, mY);
 	cout << " " << endl;
 	mX -= step;
@@ -21,7 +21,7 @@ void CPEOPLE::Left(int step){
 	cout << "Y" << endl;
 }
 void CPEOPLE::Right(int step){
-	if (mX == BOARD_ENDX) return;
+	if (mX == X_END) return;
 	GotoXY(mX, mY);
 	cout << " " << endl;
 	mX += step;
@@ -29,7 +29,7 @@ void CPEOPLE::Right(int step){
 	cout << "Y" << endl;
 }
 void CPEOPLE::Down(int step) {
-	if (mX == BOARD_ENDY) return;
+	if (mX == Y_END) return;
 	GotoXY(mX, mY);
 	cout << " " << endl;
 	mY += step;
@@ -40,7 +40,7 @@ void CPEOPLE::Down(int step) {
 //bool CPEOPLE::isImpact(const CVEHICLE*&);
 //bool CPEOPLE::isImpact(const CANIMAL*&);
 bool CPEOPLE::isFinish(){
-	if (mY == BOARD_STARTY) return true;
+	if (mY == Y_START) return true;
 	return false;
 }
 bool CPEOPLE::isDead() {

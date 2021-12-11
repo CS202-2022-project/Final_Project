@@ -5,7 +5,7 @@
 #include <Windows.h>
 
 const int X_START = 0;  // estimated, will be updated later.
-const int Y_START = 2;
+const int Y_START = 0;
 const int X_END = 90;
 const int Y_END = 28;
 

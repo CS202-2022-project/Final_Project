@@ -15,27 +15,29 @@
 using namespace std;
 
 CGAME cg;
-bool IS_RUNNING = true;
+bool IS_RUNNING = false;
 char MOVING;
 
 void SubThread() {
-    while (IS_RUNNING) {
-        if (!cg.getPeople().isDead()) //Alive
-            cg.updatePosPeople(MOVING);
-        MOVING = ' ';
-        cg.updatePosVehicle();
-        cg.updatePosAnimal();
-        cg.drawGame();
-        /*
-        if (cg.getPeople().isImpact(cg.getVehicle()) || cg.getPeople().isImpact(cg.getAnimal())) {
-            // Impact then playing sound and stuff    
+    while (1) {
+        while (IS_RUNNING) {
+            if (!cg.getPeople().isDead()) //Alive
+                cg.updatePosPeople(MOVING);
+            MOVING = ' ';
+            cg.updatePosVehicle();
+            cg.updatePosAnimal();
+            cg.drawGame();
+            /*
+            if (cg.getPeople().isImpact(cg.getVehicle()) || cg.getPeople().isImpact(cg.getAnimal())) {
+                // Impact then playing sound and stuff    
+            }
+            */
+        if (cg.getPeople().isFinish()) {
+            // Cross the finish line
         }
-        */
-       if (cg.getPeople().isFinish()) {
-           // Cross the finish line
-       }
-       Sleep(1000);
-    }        
+        Sleep(1000);
+        }   
+    }     
 }
 
 int main() {
@@ -48,22 +50,32 @@ int main() {
         int temp = toupper(getch());
         if (!cg.getPeople().isDead()) {
             if (temp == 27) {
+                IS_RUNNING = false;
                 cg.exitGame((HANDLE)t1.native_handle());
                 return 0;
             }
-            else if (temp == 'P')
+            else if (temp == 'P') {
+                IS_RUNNING = false;
                 cg.pauseGame((HANDLE)t1.native_handle());
+            }
             else {
+                IS_RUNNING = true;
                 cg.resumeGame((HANDLE)t1.native_handle());
                 MOVING = temp; // Update movement
             }
         }
         else {
-            if (temp == 'Y') cg.startGame();
+            // Show up menu here
+            if (temp == 'Y') {
+                IS_RUNNING = true;
+                cg.startGame();
+            }
             else {
+                IS_RUNNING = false;                
                 cg.exitGame((HANDLE)t1.native_handle());
                 return 0;
             }
         }
     }
+    return 0;
 }

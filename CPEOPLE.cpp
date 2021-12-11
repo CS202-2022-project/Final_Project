@@ -1,17 +1,17 @@
 #include"CPEOPLE.h"
 CPEOPLE::CPEOPLE() {
-	mX = 20;
-	mY = 20;
+	mX = 0;
+	mY = 0;
 	mState = true;
-	sprite.push_back("/ \\");
-	sprite.push_back(" |\\");
-	sprite.push_back("\\o ");	
+	sprite.push_back("  o  ");	
+	sprite.push_back("--|--");
+	sprite.push_back(" / \\ ");
 };
 void CPEOPLE::Draw() {
 	int y = mY;
 	for (int i = 0; i < 3; i++)
 	{
-		GotoXY(mX,y--);
+		GotoXY(mX,y++);
 		cout << sprite[i];
 	}
 }
@@ -19,8 +19,8 @@ void CPEOPLE::deDraw() {
 	int y = mY;
 	for (int i = 0; i < 3; i++)
 	{
-		GotoXY(mX, y--);
-		cout << "   ";
+		GotoXY(mX, y++);
+		cout << "     ";
 	}
 }
 void CPEOPLE::Up(int step) {
@@ -64,4 +64,8 @@ bool CPEOPLE::isFinish(){
 }
 bool CPEOPLE::isDead() {
 	return mState;
+}
+
+void CPEOPLE::setState(bool b) {
+	mState = b;
 }

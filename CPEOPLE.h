@@ -21,5 +21,7 @@ public:
 	//bool isImpact(const CANIMAL*&);
 	bool isFinish();
 	bool isDead();
+
+	void setState(bool b);
 };
 #endif

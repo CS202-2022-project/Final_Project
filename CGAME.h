@@ -9,10 +9,16 @@
 #include "CVEHICLE.h"
 #include "CPEOPLE.h"
 #include "CANIMAL.h"
+#include "Console.h"
 #include "winnt.h"
 #include <iostream>
 
 using namespace std;
+
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
 
 class CGAME{
     public:
@@ -29,13 +35,13 @@ class CGAME{
         void saveGame(istream); // Save the game
         void pauseGame(HANDLE); // Pause the Thread
         void resumeGame(HANDLE); // Resume the Thread
-        void updatePosPeople(char); // Movement control
+        void updatePosPeople(char c); // Movement control
         void updatePosVehicle(); // Change vehicle Position
         void updatePosAnimal(); // Change animal position
 
         void testSprite();
     protected:
-        int levels;
+        int levels ;
         CTRUCK* axt = nullptr;
         CCAR* axh = nullptr;
         CDINAUSOR* akl = nullptr;

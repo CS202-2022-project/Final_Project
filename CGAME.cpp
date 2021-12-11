@@ -1,18 +1,28 @@
 #include "CGAME.h"
 
 CGAME::CGAME() {
-    levels = 1;
+    levels = 4;
     axh = new CCAR;
-    axh -> move(3, 6);
+    axh -> move(7, 1);
     axt = new CTRUCK;
-    axt -> move(3, 11);
+    axt -> move(14, 1);
     ac = new CBIRD;
-    ac -> Move(3, 16);
+    ac -> Move(26, 1);
     akl = new CDINAUSOR;
-    akl -> Move(3, 21);
+    akl -> Move(33, 1);
 }
 
 void CGAME::drawGame() { 
+    int col = 0;
+    for (int j = 1; j <= levels; j++) {
+        col += (j == 3 ? 12 : 7);
+        for (int k = 0; k <= 1; k++)
+            for (int i = Y_START; i <= Y_END; i++) {
+                GotoXY(col - 2 + k, i);
+                cout << '|';
+            } 
+    }            
+    cn.Draw();
     axh -> draw();  
     if (levels >= 2)  
         axt -> draw();
@@ -55,7 +65,7 @@ void CGAME::exitGame(HANDLE) {
 }
 
 void CGAME::startGame() {
-
+    cn.setState(true);
 }
 
 void CGAME::loadGame(istream) {
@@ -74,8 +84,11 @@ void CGAME::resumeGame(HANDLE) {
 
 }
 
-void CGAME::updatePosPeople(char) {
-
+void CGAME::updatePosPeople(char c) {
+    if (c == KEY_UP) cn.Up(1);
+    if (c == KEY_RIGHT) cn.Right(2);
+    if (c == KEY_DOWN) cn.Down(1);
+    if (c == KEY_LEFT) cn.Left(2); 
 }
 
 void CGAME::updatePosVehicle() {

@@ -11,7 +11,7 @@ void CPEOPLE::Draw() {
 	int y = mY;
 	for (int i = 0; i < 3; i++)
 	{
-		GotoXY(mX,y++);
+		GotoXY(mX, y + i);
 		cout << sprite[i];
 	}
 }
@@ -19,12 +19,12 @@ void CPEOPLE::deDraw() {
 	int y = mY;
 	for (int i = 0; i < 3; i++)
 	{
-		GotoXY(mX, y++);
+		GotoXY(mX, y + i);
 		cout << "     ";
 	}
 }
 void CPEOPLE::Up(int step) {
-	if (mY == Y_START) return;
+	if (mY - step < Y_START) return;
 	GotoXY(mX, mY);
 	deDraw();
 	mY -= step;
@@ -32,7 +32,7 @@ void CPEOPLE::Up(int step) {
 	Draw();
 }
 void CPEOPLE::Left(int step){
-	if (mX == X_START) return;
+	if (mX - step < X_START) return;
 	GotoXY(mX, mY);
 	deDraw();
 	mX -= step;
@@ -40,7 +40,7 @@ void CPEOPLE::Left(int step){
 	Draw();
 }
 void CPEOPLE::Right(int step){
-	if (mX == X_END) return;
+	if (mX + step > X_END) return;
 	GotoXY(mX, mY);
 	deDraw();
 	mX += step;
@@ -48,7 +48,7 @@ void CPEOPLE::Right(int step){
 	Draw();
 }
 void CPEOPLE::Down(int step) {
-	if (mX == Y_END) return;
+	if (mY + step > Y_END) return;
 	GotoXY(mX, mY);
 	deDraw();
 	mY += step;

@@ -20,3 +20,12 @@ void TextColor(int x) //ham to mau
 	clr = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(clr, x);
 }
+
+void hideCursor()
+{
+   HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+   CONSOLE_CURSOR_INFO info;
+   info.dwSize = 100;
+   info.bVisible = FALSE;
+   SetConsoleCursorInfo(consoleHandle, &info);
+}

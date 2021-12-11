@@ -15,11 +15,6 @@
 
 using namespace std;
 
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
-
 class CGAME{
     public:
         CGAME(); //Prepare data
@@ -29,12 +24,12 @@ class CGAME{
         CVEHICLE* getVehicle(); // Get vehicle info
         CANIMAL* getAnimal(); // Get animal info
         void resetGame(); // Reset all data to the initial value
-        void exitGame(HANDLE); // Exit from Thread
+        void exitGame(HANDLE t); // Exit from Thread
         void startGame(); // Start the game
         void loadGame(istream); // Load the game
         void saveGame(istream); // Save the game
-        void pauseGame(HANDLE); // Pause the Thread
-        void resumeGame(HANDLE); // Resume the Thread
+        void pauseGame(HANDLE t); // Pause the Thread
+        void resumeGame(HANDLE t); // Resume the Thread
         void updatePosPeople(char c); // Movement control
         void updatePosVehicle(); // Change vehicle Position
         void updatePosAnimal(); // Change animal position

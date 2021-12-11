@@ -32,27 +32,30 @@ void SubThread() {
                 // Impact then playing sound and stuff    
             }
             */
-        if (cg.getPeople().isFinish()) {
-            // Cross the finish line
-        }
-        Sleep(1000);
-        }   
-    }     
+            if (cg.getPeople().isFinish()) {
+                // Cross the finish line
+            }
+            //Sleep(100);
+        }    
+    }
 }
 
 int main() {
     //cg.testSprite();
     int temp;
     FixConsoleWindow();
-    cg.startGame();
+    hideCursor();
     thread t1(SubThread); // Create a subthread
     while(1){
         int temp = toupper(getch());
+        //cerr << temp << ' ' << IS_RUNNING << '\n';
+        //cerr << cg.getPeople().isDead() << '\n';
+
         if (!cg.getPeople().isDead()) {
             if (temp == 27) {
                 IS_RUNNING = false;
                 cg.exitGame((HANDLE)t1.native_handle());
-                return 0;
+                break;
             }
             else if (temp == 'P') {
                 IS_RUNNING = false;
@@ -73,7 +76,7 @@ int main() {
             else {
                 IS_RUNNING = false;                
                 cg.exitGame((HANDLE)t1.native_handle());
-                return 0;
+                break;
             }
         }
     }

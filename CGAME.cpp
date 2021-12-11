@@ -61,11 +61,12 @@ void CGAME::resetGame() {
     ac = new CBIRD;
 }
 
-void CGAME::exitGame(HANDLE) {
+void CGAME::exitGame(HANDLE t) {
+    ::TerminateThread(t, 1);
 }
 
 void CGAME::startGame() {
-    cn.setState(true);
+    cn.setState(false);
 }
 
 void CGAME::loadGame(istream) {
@@ -76,19 +77,19 @@ void CGAME::saveGame(istream) {
 
 }
 
-void CGAME::pauseGame(HANDLE) {
-
+void CGAME::pauseGame(HANDLE t) {
+    ::SuspendThread(t);
 }
 
-void CGAME::resumeGame(HANDLE) {
-
+void CGAME::resumeGame(HANDLE t) {
+    ::ResumeThread(t);
 }
 
 void CGAME::updatePosPeople(char c) {
-    if (c == KEY_UP) cn.Up(1);
-    if (c == KEY_RIGHT) cn.Right(2);
-    if (c == KEY_DOWN) cn.Down(1);
-    if (c == KEY_LEFT) cn.Left(2); 
+    if (c == 'W') cn.Up(1);
+    if (c == 'D') cn.Right(1);
+    if (c == 'S') cn.Down(1);
+    if (c == 'A') cn.Left(1); 
 }
 
 void CGAME::updatePosVehicle() {

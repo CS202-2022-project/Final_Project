@@ -12,5 +12,5 @@ const int Y_END = 28;
 void FixConsoleWindow();
 void GotoXY(int x, int y);
 void TextColor(int x); // ham to mau
-
+void hideCursor();
 #endif

@@ -16,6 +16,6 @@ public:
 	CANIMAL();
     void Move(int x, int y);
 	virtual void tell() =0;
-	virtual void draw(int x, int y)=0;
+	virtual void draw()=0;
 };
 #endif // !_CANIMAL_H_

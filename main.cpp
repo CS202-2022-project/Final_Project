@@ -14,15 +14,9 @@
 
 using namespace std;
 
+CGAME cg;
 bool IS_RUNNING = true;
 char MOVING;
-CGAME cg;
-
-void exitGame(thread* t) {
-    system("cls");
-    IS_RUNNING = false;
-    t -> join();
-}
 
 void SubThread() {
     while (IS_RUNNING) {
@@ -40,7 +34,7 @@ void SubThread() {
        if (cg.getPeople().isFinish()) {
            // Cross the finish line
        }
-       Sleep(100);
+       Sleep(1000);
     }        
 }
 

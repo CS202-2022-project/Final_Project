@@ -5,7 +5,7 @@
 class CBIRD :public CANIMAL {
 public:
 	CBIRD();
-	void draw(int x, int y);
+	void draw();
 	void tell();
 };
 #endif // !_CBIRD_H_

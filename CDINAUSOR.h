@@ -6,6 +6,6 @@ class CDINAUSOR : public CANIMAL {
 public:
 	CDINAUSOR();
 	void tell();
-	void draw(int x, int y);
+	void draw();
 };
 #endif // !_CDINAUSOR_H_

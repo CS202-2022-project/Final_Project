@@ -12,10 +12,10 @@ CDINAUSOR::CDINAUSOR():CANIMAL(){
     sprite.push_back(temp);
 }
 
-void CDINAUSOR::draw(int x, int y){
+void CDINAUSOR::draw(){
 for(int i=0;i<4;i++)
     {
-        GotoXY(x,y+i);
+        GotoXY(mX,mY+i);
         cout<<sprite[i];
     }
     

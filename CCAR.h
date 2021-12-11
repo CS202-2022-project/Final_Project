@@ -10,7 +10,7 @@ class CCAR : public CVEHICLE{
 public:
     CCAR();
     CCAR(int x, int y);
-    void draw(int x, int y);
+    void draw();
     //void updatePos(int, int);
 private:
     std::vector<std::string> sprite ;

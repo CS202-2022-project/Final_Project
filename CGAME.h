@@ -35,10 +35,11 @@ class CGAME{
 
         void testSprite();
     protected:
-        CTRUCK* axt;
-        CCAR* axh;
-        CDINAUSOR* akl;
-        CBIRD* ac;
+        int levels;
+        CTRUCK* axt = nullptr;
+        CCAR* axh = nullptr;
+        CDINAUSOR* akl = nullptr;
+        CBIRD* ac = nullptr;
         CPEOPLE cn;        
 };
 

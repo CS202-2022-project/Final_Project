@@ -19,10 +19,11 @@ CCAR::CCAR(int x, int y){
     sprite.push_back("/___\\");
 }
 
-void CCAR::draw(int x, int y){
+void CCAR::draw(){
     std::vector<std::string>::iterator ptr;
-    for (ptr = sprite.begin(); ptr < sprite.end(); ptr++){
-        GotoXY(x,y++);
+    int i = 0;
+    for (ptr = sprite.begin(); ptr < sprite.end(); ptr++, i++){
+        GotoXY(mX,mY + i);
         cout << *ptr;
     }
 }

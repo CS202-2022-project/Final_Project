@@ -22,10 +22,11 @@ CTRUCK::CTRUCK(int x, int y){
     sprite.push_back("|__o__o__|");
 }
 
-void CTRUCK::draw(int x, int y){
+void CTRUCK::draw(){
     vector<std::string>::iterator ptr;
-    for (ptr = sprite.begin(); ptr < sprite.end(); ptr++){
-        GotoXY(x,y++);
+    int i = 0;
+    for (ptr = sprite.begin(); ptr < sprite.end(); ptr++, i++){
+        GotoXY(mX,mY+i);
         cout << *ptr;
     }
 }

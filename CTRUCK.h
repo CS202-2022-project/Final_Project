@@ -9,7 +9,7 @@ class CTRUCK : public CVEHICLE{
 public:
     CTRUCK();
     CTRUCK(int x, int y);
-    void draw(int x, int y);
+    void draw();
     //void updatePos(int, int);
 private:
     std::vector<std::string> sprite;

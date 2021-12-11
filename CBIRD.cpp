@@ -16,10 +16,10 @@ CBIRD::CBIRD():CANIMAL(){
       o
         
 */
-void CBIRD::draw(int x, int y){
+void CBIRD::draw(){
     for(int i=0;i<3;i++)
     {
-        GotoXY(x,y+i);
+        GotoXY(mX,mY+i);
         cout<<sprite[i];
     }
 }

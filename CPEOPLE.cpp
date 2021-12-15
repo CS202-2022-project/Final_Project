@@ -1,4 +1,6 @@
 #include"CPEOPLE.h"
+#include"CVEHICLE.h"
+#include"CANIMAL.h"
 CPEOPLE::CPEOPLE() {
 	mX = 0;
 	mY = 0;
@@ -56,8 +58,32 @@ void CPEOPLE::Down(int step) {
 	Draw();
 
 }
-//bool CPEOPLE::isImpact(const CVEHICLE*&);
-//bool CPEOPLE::isImpact(const CANIMAL*&);
+bool CPEOPLE::isImpact(CVEHICLE* v) {
+	for (int i = 0; i < 10; i++)	//estimated 10 vehicles
+	{		
+		if (this->mX+4 <= (v[i].getX() + v[i].getWidth() -1) && this->mX+4 >=v[i].getX() ||		//check if step in the lane
+			(this->mX >= v[i].getX() && this->mX <= (v[i].getX() + v[i].getWidth() - 1)))		//check if still in the lane
+		{	
+				if (this->mY >= v[i].getY() && this->mY <= (v[i].getY() + v[i].getHeight() - 1) ||			//head got hit
+					(this->mY + 2 >= v[i].getY() && this->mY + 2 <= (v[i].getY() + v[i].getHeight() - 1)))	//foot got hit
+					return true;
+		}
+	}
+	return false;
+}
+bool CPEOPLE::isImpact(CANIMAL* v) {
+	for (int i = 0; i < 10; i++)	//estimated 10 vanimals
+	{
+		if (this->mX + 4 <= (v[i].getX() + v[i].getWidth() - 1) && this->mX + 4 >= v[i].getX() ||		//check if step in the lane
+			(this->mX >= v[i].getX() && this->mX <= (v[i].getX() + v[i].getWidth() - 1)))				//check if still in the lane
+		{
+			if (this->mY >= v[i].getY() && this->mY <= (v[i].getY() + v[i].getHeight() - 1) ||				//head gets hit
+				(this->mY + 2 >= v[i].getY() && this->mY + 2 <= (v[i].getY() + v[i].getHeight() - 1)))		//foot gets hit
+				return true;
+		}
+	}
+	return false;
+}
 bool CPEOPLE::isFinish(){
 	if (mY == Y_START) return true;
 	return false;

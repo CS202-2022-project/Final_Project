@@ -17,8 +17,8 @@ public:
 	void Left(int);
 	void Right(int);
 	void Down(int);
-	//bool isImpact(const CVEHICLE*&);
-	//bool isImpact(const CANIMAL*&);
+	bool isImpact(CVEHICLE* v);
+	bool isImpact(CANIMAL* v);
 	bool isFinish();
 	bool isDead();
 

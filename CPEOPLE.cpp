@@ -50,7 +50,7 @@ void CPEOPLE::Right(int step){
 	Draw();
 }
 void CPEOPLE::Down(int step) {
-	if (mY + step > Y_END) return;
+	if (mY + step + 1 > Y_END) return;
 	GotoXY(mX, mY);
 	deDraw();
 	mY += step;
@@ -58,6 +58,8 @@ void CPEOPLE::Down(int step) {
 	Draw();
 
 }
+
+/*
 bool CPEOPLE::isImpact(CVEHICLE* v) {
 	for (int i = 0; i < 10; i++)	//estimated 10 vehicles
 	{		
@@ -84,8 +86,19 @@ bool CPEOPLE::isImpact(CANIMAL* v) {
 	}
 	return false;
 }
-bool CPEOPLE::isFinish(){
-	if (mY == Y_START) return true;
+*/
+
+void CPEOPLE::Move(int x, int y) {
+	GotoXY(mX, mY);
+	deDraw();
+	mX = x;
+	mY = y;
+	GotoXY(mX, mY);
+	Draw();
+}
+
+bool CPEOPLE::isFinish(int x){
+	if (mX >= x) return true;
 	return false;
 }
 bool CPEOPLE::isDead() {

@@ -33,14 +33,17 @@ class CGAME{
         void updatePosPeople(char c); // Movement control
         void updatePosVehicle(); // Change vehicle Position
         void updatePosAnimal(); // Change animal position
-
+        int getLevel();
+        bool isFinish();
+        bool nextLevel();
         void testSprite();
     protected:
-        int levels ;
-        CTRUCK* axt = nullptr;
-        CCAR* axh = nullptr;
-        CDINAUSOR* akl = nullptr;
-        CBIRD* ac = nullptr;
+        int levels = 1;
+        int f[5] = {0, 21, 52, 73, 94};
+        CTRUCK* axt1 = nullptr, *axt2 = nullptr;
+        CCAR* axh1 = nullptr, *axh2 = nullptr;
+        CDINAUSOR* akl1 = nullptr, *akl2 = nullptr;
+        CBIRD* ac1 = nullptr, *ac2 = nullptr;
         CPEOPLE cn;        
 };
 

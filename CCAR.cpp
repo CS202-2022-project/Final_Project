@@ -28,10 +28,10 @@ void CCAR::draw(){
     }
 }
 
-void CCAR::deDraw(){
-    for(int i = 0 ; i < 2 ; i++){
-        GotoXY(mX,mY + i);
-        cout <<"     ";
+void CCAR::deDraw() {
+    for (int i = 0; i < 2; i++) {
+        GotoXY(mX, mY + i);
+        cout << "     ";
     }
 }
 // FIRST EDITION
@@ -65,3 +65,15 @@ void CCAR::deDraw(){
 //         printf("%c",ch);
 //     }
 // }
+
+int CCAR::getWidth() {
+    int max = 0;
+    vector<std::string>::iterator ptr;
+    for (ptr = sprite.begin(); ptr < sprite.end(); ptr++) {
+        if (ptr->length() > max) max = ptr->length();
+    }
+    return max;
+}
+int CCAR::getHeight() {
+    return sprite.size();
+}

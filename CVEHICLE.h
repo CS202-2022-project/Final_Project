@@ -11,6 +11,10 @@ public:
     void move(int x, int y);
     virtual void draw() = 0;
     virtual void deDraw() = 0;
+    int getX();
+    int getY();
+    virtual int getWidth() = 0;
+    virtual int getHeight() = 0;
 protected:
     int mX, mY;    // the bottom left point
     // int m_width, m_height;

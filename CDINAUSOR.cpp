@@ -23,3 +23,15 @@ for(int i=0;i<4;i++)
 void CDINAUSOR::tell(){
     bool played= PlaySound(TEXT("sounds/trex_road.wav"),NULL,SND_ASYNC);
 }
+
+int CDINAUSOR::getWidth() {
+    int max = 0;
+    vector<std::string>::iterator ptr;
+    for (ptr = sprite.begin(); ptr < sprite.end(); ptr++) {
+        if (ptr->length() > max) max = ptr->length();
+    }
+    return max;
+}
+int CDINAUSOR::getHeight() {
+    return sprite.size();
+}

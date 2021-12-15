@@ -7,5 +7,7 @@ public:
 	CBIRD();
 	void draw();
 	void tell();
+	int getWidth();
+	int getHeight();
 };
 #endif // !_CBIRD_H_

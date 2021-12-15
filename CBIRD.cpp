@@ -26,3 +26,15 @@ void CBIRD::draw(){
 void CBIRD::tell(){
     bool played= PlaySound(TEXT("sounds/bird_roar.wav"),NULL,SND_ASYNC);
 }
+
+int CBIRD::getWidth() {
+    int max = 0;
+    vector<std::string>::iterator ptr;
+    for (ptr = sprite.begin(); ptr < sprite.end(); ptr++) {
+        if (ptr->length() > max) max = ptr->length();
+    }
+    return max;
+}
+int CBIRD::getHeight() {
+    return sprite.size();
+}

@@ -22,3 +22,9 @@ void CVEHICLE::move(int x, int y){
 //     return (m_X == X_START + 1 || m_X + m_width == X_END);
 // }
 
+int CVEHICLE::getX() {
+    return this->mX;
+}
+int CVEHICLE::getY() {
+    return this->mY;
+}

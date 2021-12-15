@@ -11,6 +11,8 @@ public:
     CCAR();
     CCAR(int x, int y);
     void draw();
+    int getWidth();
+    int getHeight();
     void deDraw();
     //void updatePos(int, int);
 private:

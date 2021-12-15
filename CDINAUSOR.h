@@ -7,5 +7,7 @@ public:
 	CDINAUSOR();
 	void tell();
 	void draw();
+	int getWidth();
+	int getHeight();
 };
 #endif // !_CDINAUSOR_H_

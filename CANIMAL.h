@@ -15,7 +15,11 @@ protected:
 public:
 	CANIMAL();
     void Move(int x, int y);
+	int getX();
+	int getY();
 	virtual void tell() =0;
 	virtual void draw()=0;
+	virtual int getWidth() = 0;
+	virtual int getHeight() = 0;
 };
 #endif // !_CANIMAL_H_

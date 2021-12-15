@@ -9,3 +9,10 @@ void CANIMAL::Move(int x, int y){
   mY=y;
   GotoXY(mX,mY);
 }
+
+int CANIMAL::getX() {
+    return this->mX;
+}
+int CANIMAL::getY() {
+    return this->mY;
+}

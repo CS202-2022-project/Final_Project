@@ -31,14 +31,13 @@ void CTRUCK::draw(){
     }
 }
 
-void CTRUCK::deDraw(){
+void CTRUCK::deDraw() {
     int y = this->mY;
-    for(int i = 0 ; i < 4 ; ++i){
+    for (int i = 0; i < 4; ++i) {
         GotoXY(mX, y + i);
         cout << "          ";
     }
 }
-
 // CTRUCK::CTRUCK(){
 //     m_X = 0;
 //     m_Y = 0;
@@ -69,4 +68,14 @@ void CTRUCK::deDraw(){
 //         printf("%c",ch);
 //     }
 // }
-
+int CTRUCK::getWidth() {
+    int max = 0;
+    vector<std::string>::iterator ptr;
+    for (ptr = sprite.begin(); ptr < sprite.end(); ptr++) {
+        if (ptr->length() > max) max = ptr->length();
+    }
+    return max;
+}
+int CTRUCK::getHeight() {
+    return sprite.size();
+}

@@ -27,6 +27,13 @@ void CCAR::draw(){
         cout << *ptr;
     }
 }
+
+void CCAR::deDraw(){
+    for(int i = 0 ; i < 2 ; i++){
+        GotoXY(mX,mY + i);
+        cout <<"     ";
+    }
+}
 // FIRST EDITION
 // CCAR::CCAR(){
 //     m_X = 0;

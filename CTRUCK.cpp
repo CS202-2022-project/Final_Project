@@ -31,6 +31,14 @@ void CTRUCK::draw(){
     }
 }
 
+void CTRUCK::deDraw(){
+    int y = this->mY;
+    for(int i = 0 ; i < 4 ; ++i){
+        GotoXY(mX, y + i);
+        cout << "          ";
+    }
+}
+
 // CTRUCK::CTRUCK(){
 //     m_X = 0;
 //     m_Y = 0;

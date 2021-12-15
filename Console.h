@@ -7,7 +7,7 @@
 
 const int X_START = 0;  // estimated, will be updated later.
 const int Y_START = 0;
-const int X_END = 90;
+const int X_END = 105;
 const int Y_END = 28;
 
 void FixConsoleWindow();

@@ -17,9 +17,10 @@ public:
 	void Left(int);
 	void Right(int);
 	void Down(int);
-	bool isImpact(CVEHICLE* v);
-	bool isImpact(CANIMAL* v);
-	bool isFinish();
+	void Move(int x, int y);
+	//bool isImpact(CVEHICLE* v);
+	//bool isImpact(CANIMAL* v);
+	bool isFinish(int);
 	bool isDead();
 
 	void setState(bool b);

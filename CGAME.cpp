@@ -1,42 +1,106 @@
 #include "CGAME.h"
 
 CGAME::CGAME() {
-    levels = 4;
-    axh = new CCAR;
-    axh -> move(7, 1);
-    axt = new CTRUCK;
-    axt -> move(14, 1);
-    ac = new CBIRD;
-    ac -> Move(26, 1);
-    akl = new CDINAUSOR;
-    akl -> Move(33, 1);
+    levels = 1;
+
+    axh1 = new CCAR;
+    axh2 = new CCAR;
+
+    axt1 = new CTRUCK;
+    axt2 = new CTRUCK;
+
+    ac1 = new CBIRD;
+    ac2 = new CBIRD;
+
+    akl1 = new CDINAUSOR;
+    akl2 = new CDINAUSOR;
 }
 
 void CGAME::drawGame() { 
-    int col = 0;
-    for (int j = 1; j <= levels; j++) {
-        col += (j == 3 ? 12 : 7);
-        for (int k = 0; k <= 1; k++)
-            for (int i = Y_START; i <= Y_END; i++) {
-                GotoXY(col - 2 + k, i);
+    //cn.Draw();
+    TextColor(10);
+
+    for (int i = 0; i < Y_END + 2; i++) {
+        GotoXY(6, i);
+        cout << '|';
+        GotoXY(19, i);
+        cout << '|';
+        for (int j = 0; j < 2; j++) {
+            GotoXY(12 + j, i);
+            cout << '|';
+        }          
+    }           
+
+    axh1 -> draw(), axh2 -> draw();
+
+    if (levels >= 2) {
+        TextColor(9);
+
+        for (int i = 0; i < Y_END + 2; i++) {
+            GotoXY(27, i);
+            cout << '|';
+            GotoXY(50, i);
+            cout << '|';
+            for (int j = 0; j < 2; j++) {
+                GotoXY(38 + j, i);
                 cout << '|';
-            } 
-    }            
-    cn.Draw();
-    axh -> draw();  
-    if (levels >= 2)  
-        axt -> draw();
-    if (levels >= 3)
-        ac -> draw();
-    if (levels >= 4)
-        akl -> draw();    
+            }       
+        }
+
+        axt1 -> draw(), axt2 -> draw();
+    }        
+    if (levels >= 3) {
+        TextColor(14);
+        
+        for (int i = 0; i < Y_END + 2; i++) {
+            GotoXY(58, i);
+            cout << '|';
+            GotoXY(71, i);
+            cout << '|';
+            for (int j = 0; j < 2; j++) {
+                GotoXY(64 + j, i);
+                cout << '|';
+            }      
+        }       
+
+        ac1 -> draw(), ac2 -> draw();
+    }        
+    if (levels >= 4) {
+        TextColor(12); 
+
+        for (int i = 0; i < Y_END + 2; i++) {
+            GotoXY(79, i);
+            cout << '|';
+            GotoXY(92, i);
+            cout << '|';
+            for (int j = 0; j < 2; j++) {
+                GotoXY(85 + j, i);
+                cout << '|';
+            }     
+        }       
+
+        akl1 -> draw(), akl2 -> draw();   
+    }        
+
+    for (int i = 0; i < Y_END + 2; i++)
+        for (int j = f[levels]; j < f[levels] + 5; j++) {
+            GotoXY(j, i);
+            if ((i + j - f[levels]) % 2) {
+                TextColor(255); cout << ' ';
+            }    
+            else {
+                TextColor(0); cout << ' ';
+            }
+        }
+
+    TextColor(7); // Reset Colour        
 }
 
 CGAME::~CGAME() {
-    delete axt;
-    delete axh;
-    delete ac;
-    delete akl;
+    delete axt1, axt2;
+    delete axh1, axh2;
+    delete ac1, ac2;
+    delete akl1, akl2;
 }
 
 CPEOPLE CGAME::getPeople() {
@@ -50,22 +114,51 @@ CANIMAL* CGAME::getAnimal() {
 }
 
 void CGAME::resetGame() {
-    delete axt;
-    delete axh;
-    delete ac;
-    delete akl;
-    levels = 1;    
-    axt = new CTRUCK;
-    axh = new CCAR;
-    akl = new CDINAUSOR;
-    ac = new CBIRD;
+    system("cls");
+
+    GotoXY(105, 1);
+    cout << "Level: " << levels;
+    GotoXY(105, 3);
+    cout << "Control:";
+    GotoXY(105, 4);
+    cout << "W: Go Up";
+    GotoXY(105, 5);
+    cout << "S: Go Down";
+    GotoXY(105, 6);
+    cout << "A: Go Left";
+    GotoXY(105, 7);
+    cout << "D: Go Right";
+    for (int i = 0; i <= 8; i++) {
+        GotoXY(103, i);
+        cout << '|';
+    }
+    for (int i = 103; i <= 119; i++) {
+        GotoXY(i, 8);
+        cout << '-';
+    }
+    GotoXY(103, 8); cout << 'o';
+
+    cn.Move(0, 11);
+
+    axh1 -> move(7, 0);
+    axh2 -> move(14, 28);
+
+    axt1 -> move(28, 0);
+    axt2 -> move(40, 26);
+
+    ac1 -> Move(59, 0);
+    ac2 -> Move(66, 27);  
+
+    akl1 -> Move(80, 0);
+    akl2 -> Move(87, 26);  
 }
 
 void CGAME::exitGame(HANDLE t) {
-    ::TerminateThread(t, 1);
+    cn.setState(true);
 }
 
 void CGAME::startGame() {
+    levels = 1;
     cn.setState(false);
 }
 
@@ -101,15 +194,35 @@ void CGAME::updatePosVehicle() {
 void CGAME::updatePosAnimal() {
 }
 
+bool CGAME::isFinish() {
+    return cn.isFinish(f[levels]);
+}
+
+int CGAME::getLevel() {
+    return levels;
+}
+
+bool CGAME::nextLevel() {
+    if (levels == 4) {
+        cn.setState(true);
+        return false;
+    }
+    else {
+        levels++;
+        resetGame();
+        return true;
+    }
+}
+
 // -------------------------------
 
 void CGAME::testSprite() {
-    axh -> move(1, 1);
-    axh -> draw();
-    axt -> move(1, 5);
-    axt -> draw();
-    ac -> Move(1, 10);
-    ac -> draw();
-    akl -> Move(1, 20);
-    akl -> draw();
+    axh1 -> move(1, 1);
+    axh1 -> draw();
+    axt1 -> move(1, 5);
+    axt1 -> draw();
+    ac1 -> Move(1, 10);
+    ac1 -> draw();
+    akl1 -> Move(1, 20);
+    akl1 -> draw();
 }

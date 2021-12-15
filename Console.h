@@ -3,6 +3,7 @@
 #define _CONSOLE_H_
 
 #include <Windows.h>
+#include <iostream>
 
 const int X_START = 0;  // estimated, will be updated later.
 const int Y_START = 0;
@@ -13,4 +14,7 @@ void FixConsoleWindow();
 void GotoXY(int x, int y);
 void TextColor(int x); // ham to mau
 void hideCursor();
+void clrscr();
+void drawBoard(int xTrai, int yTrai, int xPhai, int yPhai);
+void ShowConsoleCursor(bool showFlag);
 #endif

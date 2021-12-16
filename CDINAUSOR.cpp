@@ -20,21 +20,23 @@ for(int i=0;i<4;i++)
     }
     
 }
-void CDINAUSOR::Up(int step){
-if (mY - step < Y_START) return;
+bool CDINAUSOR::Up(int step){
+if (mY - step < Y_START) return false;
 	GotoXY(mX, mY);
 	deDraw();
 	mY -= step;
 	GotoXY(mX, mY);
 	Draw();
+    return true;
 }
-void CDINAUSOR::Down(int step){
-if (mX - step < X_START) return;
+bool CDINAUSOR::Down(int step){
+if (mY + step + 2 > Y_END) return false;
 	GotoXY(mX, mY);
 	deDraw();
-	mX -= step;
+	mY += step;
 	GotoXY(mX, mY);
 	Draw();
+    return true;
 }
 void CDINAUSOR::tell(){
     bool played= PlaySound(TEXT("sounds/trex_road.wav"),NULL,SND_ASYNC);

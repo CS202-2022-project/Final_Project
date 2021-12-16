@@ -42,6 +42,7 @@ class CGAME{
         bool nextLevel();
         void testSprite();
     protected:
+        unsigned int Cycle = 0;
         int levels = 1;
         int f[5] = {0, 21, 52, 73, 94};
         CTRUCK* axt1 = nullptr, *axt2 = nullptr;

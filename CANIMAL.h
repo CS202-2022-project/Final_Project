@@ -18,8 +18,8 @@ public:
 	int getX();
 	int getY();
 	void deDraw();
-	virtual void Up(int) =0;
-	virtual void Down(int) =0;
+	virtual bool Up(int) =0;
+	virtual bool Down(int) =0;
 	virtual void tell() =0;
 	virtual void Draw()=0;
 	virtual int getWidth() = 0;

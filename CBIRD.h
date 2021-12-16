@@ -6,8 +6,8 @@ class CBIRD :public CANIMAL {
 public:
 	CBIRD();
 	void Draw();
-	void Up(int);
-	void Down(int);
+	bool Up(int);
+	bool Down(int);
 	void tell();
 	int getWidth();
 	int getHeight();

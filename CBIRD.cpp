@@ -27,21 +27,23 @@ void CBIRD::Draw(){
 void CBIRD::tell(){
     bool played= PlaySound(TEXT("sounds/bird_roar.wav"),NULL,SND_ASYNC);
 }
-void CBIRD::Up(int step){
-if (mY - step < Y_START) return;
+bool CBIRD::Up(int step){
+if (mY - step < Y_START) return false;
 	GotoXY(mX, mY);
 	deDraw();
 	mY -= step;
 	GotoXY(mX, mY);
 	Draw();
+    return true;
 }
-void CBIRD::Down(int step){
-if (mX - step < X_START) return;
+bool CBIRD::Down(int step){
+if (mY + step + 1 > Y_END) return false;
 	GotoXY(mX, mY);
 	deDraw();
-	mX -= step;
+	mY += step;
 	GotoXY(mX, mY);
 	Draw();
+    return true;
 }
 int CBIRD::getWidth() {
     int max = 0;

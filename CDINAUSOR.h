@@ -7,8 +7,8 @@ public:
 	CDINAUSOR();
 	void tell();
 	void Draw();
-	void Up(int);
-	void Down(int);
+	bool Up(int);
+	bool Down(int);
 	int getWidth();
 	int getHeight();
 };

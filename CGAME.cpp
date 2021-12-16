@@ -63,7 +63,7 @@ void CGAME::drawGame() {
             }      
         }       
 
-        ac1 -> draw(), ac2 -> draw();
+        ac1 -> Draw(), ac2 -> Draw();
     }        
     if (levels >= 4) {
         TextColor(12); 
@@ -79,7 +79,7 @@ void CGAME::drawGame() {
             }     
         }       
 
-        akl1 -> draw(), akl2 -> draw();   
+        akl1 -> Draw(), akl2 -> Draw();   
     }        
 
     for (int i = 0; i < Y_END + 2; i++)
@@ -184,12 +184,34 @@ void CGAME::updatePosPeople(char c) {
 }
 
 void CGAME::updatePosVehicle() {
-    if (levels >= 2) {
+    Cycle++;
+
+    if (levels >= 2) { // Truck
 
     }
 }
 
 void CGAME::updatePosAnimal() {
+    if (levels >= 3) { // Bird
+        if (Cycle % 4 == 0) {
+            ac1 -> deDraw();
+            if (!ac1 -> Down(2)) ac1 -> Move(59, 0);
+        }
+        if (Cycle % 5 == 0) {
+            ac2 -> deDraw();                      
+            if (!ac2 -> Up(2)) ac2 -> Move(66, 27);
+        }
+    }
+    if (levels >= 4) { //Dinosaur
+        if (Cycle % 5 == 0) {
+            akl1 -> deDraw();
+            if (!akl1 -> Down(3)) akl1 -> Move(80, 0);
+        }
+        if (Cycle % 4 == 0) {
+            akl2 -> deDraw();                      
+            if (!akl2 -> Up(3)) akl2 -> Move(87, 26);
+        }
+    }
 }
 
 bool CGAME::isImpact(bool PLAYSOUND) {
@@ -245,7 +267,7 @@ void CGAME::testSprite() {
     axt1 -> move(1, 5);
     axt1 -> draw();
     ac1 -> Move(1, 10);
-    ac1 -> draw();
+    ac1 -> Draw();
     akl1 -> Move(1, 20);
-    akl1 -> draw();
+    akl1 -> Draw();
 }

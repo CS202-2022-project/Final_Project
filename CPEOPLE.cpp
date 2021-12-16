@@ -54,7 +54,6 @@ void CPEOPLE::Down(int step) {
 	mY += step;
 	GotoXY(mX, mY);
 	Draw();
-
 }
 
 // Code nay hoi dai, nen t sua lai the nay cho ngan hon nhe

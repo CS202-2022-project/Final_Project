@@ -58,4 +58,5 @@ public:
 	void drawSettings();
 	void setting();
 	void updateSetting();
+	int updatePause();
 };

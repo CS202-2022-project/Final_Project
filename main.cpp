@@ -43,7 +43,7 @@ void SubThread() {
 
             cg.drawGame();
             
-            if (cg.isImpact()) {
+            if (cg.isImpact(PLAYSOUND)) {
                 IS_RUNNING = false;
                 CRASH = true;
                 break;
@@ -77,8 +77,9 @@ int main() {
         // This is where the game take place
 
         // Show up menu here  
-        if (PLAYSOUND)
-            playSound("sounds/menu_startgame.wav");
+        if (PLAYSOUND) playSound("sounds/menu_startgame.wav");
+        else stopSound();
+
         system("cls"); 
         MENU.draw();
 
@@ -143,6 +144,7 @@ int main() {
             }
             if (CRASH) {
                 // Impact here
+                Sleep(5000);
                 system("cls");
                 cout << "CRASH";
                 system("pause");

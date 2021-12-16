@@ -35,7 +35,7 @@ class CGAME{
         void updatePosVehicle(); // Change vehicle Position
         void updatePosAnimal(); // Change animal position
 
-        bool isImpact();
+        bool isImpact(bool PLAYSOUND);
         int getLevel();
         void setLevel(int x);
         bool isFinish();

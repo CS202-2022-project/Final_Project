@@ -192,12 +192,23 @@ void CGAME::updatePosVehicle() {
 void CGAME::updatePosAnimal() {
 }
 
-bool CGAME::isImpact() {
+bool CGAME::isImpact(bool PLAYSOUND) {
     bool B = false;
-    if (cn.isImpact(axt1) || cn.isImpact(axt2) ||
-    cn.isImpact(axh1) || cn.isImpact(axh2) ||
-    cn.isImpact(ac1) || cn.isImpact(ac2) ||
-    cn.isImpact(akl1) || cn.isImpact(akl2)) B = true;
+    if (cn.isImpact(axt1) || cn.isImpact(axt2) ||cn.isImpact(axh1) || cn.isImpact(axh2)) {
+        if (PLAYSOUND)
+            playSound("sounds/impact_car_crash.wav");
+        B = true;
+    }
+    else if (cn.isImpact(ac1) || cn.isImpact(ac2)) {
+        if (PLAYSOUND)
+            playSound("sounds/bird_roar.wav");
+        B = true;
+    }
+    else if (cn.isImpact(akl1) || cn.isImpact(akl2)) {
+        if (PLAYSOUND)
+            playSound("sounds/trex_roar.wav");
+        B = true;
+    }
     if (B) cn.setState(true);
     return B;
 }

@@ -22,4 +22,5 @@ void clrscr();
 void drawBoard(int xTrai, int yTrai, int xPhai, int yPhai);
 void ShowConsoleCursor(bool showFlag);
 void playSound(std::string s);
+void stopSound();
 #endif

@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <vector>
 #include <mmsystem.h>
+#include <utility>
 //#include <mciapi.h>
 
 using namespace std;
@@ -41,11 +42,12 @@ private:
 
 	};
 	int m_width, m_height;
-	int levelStart = 0, music = 0;
-	string musicState[2] = { "OFF", "ON" };
-	string m_list[MAX_CHOICE] = { "New game", "Load Game", "Settings", "Exit" };
-	string m_settingList[2] = { "Level", "Music" };
+	int levelStart = 1, music = 0;
+	string musicState[2] = { "<OFF>", "<ON> " };
 	string listPause[2] = { "Continue", "Exit" };
+	string m_list[MAX_CHOICE] = { "New Game", " Load Game", "Settings", "Exit" };
+	string m_settingList[2] = { "Level", "Music" };
+	string level[4] = {"<1>","<2>","<3>","<4>" };
 	int m_x;
 	int m_y[MAX_CHOICE] = { 12, 16, 20, 24 };
 	void drawTitle();
@@ -56,7 +58,6 @@ public:
 	void draw();
 	int updateChoice();
 	void drawSettings();
-	void setting();
-	void updateSetting();
+	pair<int,int> updateSetting();
 	int updatePause();
 };

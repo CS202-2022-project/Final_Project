@@ -3,6 +3,7 @@
 #define _CONSOLE_H_
 
 #include <Windows.h>
+#include <string>
 #include <iostream>
 #include <utility>
 
@@ -15,8 +16,10 @@ void FixConsoleWindow();
 void GotoXY(int x, int y);
 void TextColor(int x); // ham to mau
 int GetColor();
+void SetMusic(bool b);
 void hideCursor();
 void clrscr();
 void drawBoard(int xTrai, int yTrai, int xPhai, int yPhai);
 void ShowConsoleCursor(bool showFlag);
+void playSound(std::string s);
 #endif

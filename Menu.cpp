@@ -102,8 +102,7 @@ void Menu::drawSettings()
 
 pair<int,int> Menu::updateSetting()
 {   
-	pair<int, int> setting;
-	int i = 0 , j = 0 , k = 0;
+	int i = 0 , j = levelStart - 1 , k = music;
 	while (1) {
 		GotoXY(m_x - 1, m_y[i]);
 		TextColor(14);
@@ -170,28 +169,29 @@ pair<int,int> Menu::updateSetting()
 
 		case ESC: {
 			TextColor(15);
-			return setting;
+			levelStart = j + 1, music = k;
+			return make_pair(j + 1, k);
 		}
 		default: break;
 		}
-
-		setting.first = j + 1;
-		setting.second = k;
 	}
 }
                                                 
 void Menu::drawPauseScreen() {
 	//clrscr();
+	
 	int xPivot = CONSOLE_WIDTH / 2;
+	
 	for (int i = xPivot - 10; i <= xPivot + 10; i++) {
 		for (int j = m_y[0] - 5; j <= m_y[1] + 5; j++) {
 			GotoXY(i, j);
 			cout << ' ';
 		}
 	}
+	
 	drawBoard(xPivot - 11, m_y[0] - 3, xPivot + 10, m_y[1] + 3);
 	ShowConsoleCursor(false);
-	drawTitle();
+	//drawTitle();
 	for (int i = 0; i < 2; i++) {
 		drawBoard(xPivot - 8 , m_y[i] - 1, xPivot + 7, m_y[i] + 1);
 		string s = listPause[i];

@@ -105,3 +105,6 @@ void ShowConsoleCursor(bool showFlag) {
 	SetConsoleCursorInfo(out, &cursorInfo);
 }
 
+void playSound(std::string s) {
+	PlaySound(s.c_str(), NULL, SND_ASYNC);
+}

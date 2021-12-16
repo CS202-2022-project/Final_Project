@@ -37,6 +37,7 @@ class CGAME{
 
         bool isImpact();
         int getLevel();
+        void setLevel(int x);
         bool isFinish();
         bool nextLevel();
         void testSprite();

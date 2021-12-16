@@ -157,7 +157,6 @@ void CGAME::exitGame(HANDLE t) {
 }
 
 void CGAME::startGame() {
-    levels = 1;
     cn.setState(false);
 }
 
@@ -209,6 +208,10 @@ bool CGAME::isFinish() {
 
 int CGAME::getLevel() {
     return levels;
+}
+
+void CGAME::setLevel(int x) {
+    levels = x;
 }
 
 bool CGAME::nextLevel() {

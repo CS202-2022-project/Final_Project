@@ -20,6 +20,7 @@ bool IN_GAME = true;
 bool IS_RUNNING = false;
 bool CRASH = false;
 bool PAUSE = false;
+bool PLAYSOUND = false;
 char MOVING = ' ';
 Menu MENU;
 
@@ -66,20 +67,20 @@ void SubThread() {
 
 int main() {
     //cg.testSprite();
-
     int temp;
     FixConsoleWindow();
     hideCursor();
 
     thread t1(SubThread); // Create a subthread for updating position
 
-    while(1){
+    while(IN_GAME){
         // This is where the game take place
-        if (cg.getPeople().isDead()) {
-            // Show up menu here  
-            system("cls"); 
-            MENU.draw();
-        }
+
+        // Show up menu here  
+        if (PLAYSOUND)
+            playSound("sounds/menu_startgame.wav");
+        system("cls"); 
+        MENU.draw();
 
         int temp = MENU.updateChoice();
         if (temp == 0) { // Start new game
@@ -87,10 +88,13 @@ int main() {
             IS_RUNNING = true;
         }
         else if (temp == 1) { // Load game file
+            // To be added...
         }
         else if (temp == 2) { // Do some settings
             MENU.drawSettings();
-            MENU.updateSetting();
+            pair<int, int> p = MENU.updateSetting();
+            cg.setLevel(p.first);
+            PLAYSOUND = p.second;
         }
         else if (temp == 3) { // Exit the game
             IS_RUNNING = false;
@@ -100,6 +104,8 @@ int main() {
         }
         
         if (!cg.getPeople().isDead()) {
+            if (PLAYSOUND)
+                playSound("sounds/In_game.wav");
             while (IS_RUNNING) {
                 int temp = getch();
 
@@ -152,6 +158,7 @@ int main() {
                     int temp = _getch();
                     if (temp == KEY_ENTER) break;
                 }                    
+                cg.setLevel(1);
             }
         }
     }

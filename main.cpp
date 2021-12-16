@@ -144,10 +144,18 @@ int main() {
             }
             if (CRASH) {
                 // Impact here
-                Sleep(5000);
+                Sleep(2000);
+                if (PLAYSOUND)
+                    playSound("sounds/super-mario-death-sound-sound-effect.wav");
                 system("cls");
-                cout << "CRASH";
-                system("pause");
+                while(1) {
+                    GotoXY(52, 13); 
+                    cout << "You're Dead!!";
+                    GotoXY(41, 14); 
+                    cout << "Press Enter to return to main menu.";
+                    int temp = _getch();
+                    if (temp == KEY_ENTER) break;
+                }        
                 CRASH = false;
             }
             if (cg.getLevel() == 5) {

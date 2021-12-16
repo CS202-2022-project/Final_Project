@@ -223,7 +223,7 @@ bool CGAME::isImpact(bool PLAYSOUND) {
     }
     else if (cn.isImpact(ac1) || cn.isImpact(ac2)) {
         if (PLAYSOUND)
-            playSound("sounds/bird_roar.wav");
+            playSound("sounds/Eagle_sfx.wav");
         B = true;
     }
     else if (cn.isImpact(akl1) || cn.isImpact(akl2)) {

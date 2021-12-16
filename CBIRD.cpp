@@ -16,17 +16,33 @@ CBIRD::CBIRD():CANIMAL(){
       o
         
 */
-void CBIRD::draw(){
+void CBIRD::Draw(){
     for(int i=0;i<3;i++)
     {
         GotoXY(mX,mY+i);
         cout<<sprite[i];
     }
 }
+
 void CBIRD::tell(){
     bool played= PlaySound(TEXT("sounds/bird_roar.wav"),NULL,SND_ASYNC);
 }
-
+void CBIRD::Up(int step){
+if (mY - step < Y_START) return;
+	GotoXY(mX, mY);
+	deDraw();
+	mY -= step;
+	GotoXY(mX, mY);
+	Draw();
+}
+void CBIRD::Down(int step){
+if (mX - step < X_START) return;
+	GotoXY(mX, mY);
+	deDraw();
+	mX -= step;
+	GotoXY(mX, mY);
+	Draw();
+}
 int CBIRD::getWidth() {
     int max = 0;
     vector<std::string>::iterator ptr;

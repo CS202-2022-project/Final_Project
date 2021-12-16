@@ -6,7 +6,9 @@ class CDINAUSOR : public CANIMAL {
 public:
 	CDINAUSOR();
 	void tell();
-	void draw();
+	void Draw();
+	void Up(int);
+	void Down(int);
 	int getWidth();
 	int getHeight();
 };

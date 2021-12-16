@@ -23,30 +23,33 @@ void Menu::draw()
 {
 	clrscr();
 	ShowConsoleCursor(false);
-	string str = "    MAIN MENU    ";
-	GotoXY(m_x + (10 - str.length()) / 2, m_y[0] - 3);
+	int xPivot = CONSOLE_WIDTH / 2;
+	string str = "       MAIN MENU      ";
+	GotoXY((CONSOLE_WIDTH - str.length()) / 2, m_y[0] - 3);
 	TextColor(31);  printf("%s", str.c_str()); TextColor(15);
 	drawTitle();
 	for (int i = 0; i < MAX_CHOICE; i++) {
-		drawBoard(m_x - 2, m_y[i] - 1, m_x + 10, m_y[i] + 1);
-		GotoXY(m_x, m_y[i]);
+		drawBoard(xPivot - 8, m_y[i] - 1, xPivot + 7, m_y[i] + 1);
 		string s = m_list[i];
+		int x = (CONSOLE_WIDTH - s.length()) / 2;
+		GotoXY(x, m_y[i]);
 		printf("%s", s.c_str());
 	}
 }
 
 int Menu::updateChoice()
-{
+{	
 	int i = 0;
 	while (1) {
-		GotoXY(m_x, m_y[i]);
+		int x = (CONSOLE_WIDTH - m_list[i].length()) / 2;
+		GotoXY(x, m_y[i]);
 		TextColor(14);
 		printf("%s", m_list[i].c_str());
 		switch (_getch()) {
 		case KEY_UP: {
 			if (i > 0)
 			{
-				GotoXY(m_x, m_y[i]);
+				GotoXY(x, m_y[i]);
 				TextColor(15);
 				printf("%s", m_list[i].c_str());
 				i--;
@@ -55,7 +58,7 @@ int Menu::updateChoice()
 		}
 		case KEY_DOWN: {
 			if (i < MAX_CHOICE - 1) {
-				GotoXY(m_x, m_y[i]);
+				GotoXY(x, m_y[i]);
 				TextColor(15);
 				printf("%s", m_list[i].c_str());
 				i++;
@@ -132,5 +135,16 @@ void Menu::updateSetting()
 		}
 		default: break;
 		}
+	}
+}
+
+void Menu::drawPauseScreen() {
+	for (int i = 0; i < 2; i++) {
+		int xPivot = CONSOLE_WIDTH / 2;
+		drawBoard(xPivot - 6 , m_y[i] - 1, xPivot + 5, m_y[i] + 1);
+		string s = listPause[i];
+		int x = (CONSOLE_WIDTH - s.length()) / 2;
+		GotoXY(x, m_y[i]);
+		printf("%s", s.c_str());
 	}
 }

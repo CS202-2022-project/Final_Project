@@ -45,13 +45,14 @@ private:
 	string musicState[2] = { "OFF", "ON" };
 	string m_list[MAX_CHOICE] = { "New game", "Load Game", "Settings", "Exit" };
 	string m_settingList[2] = { "Level", "Music" };
+	string listPause[2] = { "Continue", "Exit" };
 	int m_x;
 	int m_y[MAX_CHOICE] = { 12, 16, 20, 24 };
 	void drawTitle();
 
 public:
 	Menu();
-
+	void drawPauseScreen();
 	void draw();
 	int updateChoice();
 	void drawSettings();

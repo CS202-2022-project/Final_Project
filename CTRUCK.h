@@ -2,8 +2,6 @@
 #define _CTRUCK_H_
 
 #include"CVEHICLE.h"
-#include<vector>
-#include<string>
 
 class CTRUCK : public CVEHICLE{
 public:
@@ -15,7 +13,7 @@ public:
     void deDraw();
     //void updatePos(int, int);
 private:
-    std::vector<std::string> sprite;
+    //std::vector<std::string> sprite;
 };
 
 #endif

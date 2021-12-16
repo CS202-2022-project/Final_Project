@@ -1,6 +1,9 @@
 #ifndef _CVEHICLE_H_
 #define _CVEHICLE_H_
 
+#include <string>
+#include <vector>
+
 #include"CTRAFFIC_LIGHT.h"
 
 class CVEHICLE{
@@ -15,10 +18,13 @@ public:
     int getY();
     virtual int getWidth() = 0;
     virtual int getHeight() = 0;
+    friend class CPEOPLE;
+    
 protected:
-    int mX, mY;    // the bottom left point
+    int mX, mY;    // the top left point
     // int m_width, m_height;
     CTRAFFIC_LIGHT m_trafficlight;
+    std::vector<std::string> sprite;
 };
 
 #endif

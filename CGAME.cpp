@@ -107,11 +107,13 @@ CPEOPLE CGAME::getPeople() {
     return cn;
 }
 
+/*
 CVEHICLE* CGAME::getVehicle() { 
 }
 
 CANIMAL* CGAME::getAnimal() {
 }
+*/
 
 void CGAME::resetGame() {
     system("cls");
@@ -128,15 +130,8 @@ void CGAME::resetGame() {
     cout << "A: Go Left";
     GotoXY(105, 7);
     cout << "D: Go Right";
-    for (int i = 0; i <= 8; i++) {
-        GotoXY(103, i);
-        cout << '|';
-    }
-    for (int i = 103; i <= 119; i++) {
-        GotoXY(i, 8);
-        cout << '-';
-    }
-    GotoXY(103, 8); cout << 'o';
+
+    drawBoard(103, 0, 119, 8);
 
     cn.Move(0, 11);
 
@@ -194,6 +189,16 @@ void CGAME::updatePosVehicle() {
 void CGAME::updatePosAnimal() {
 }
 
+bool CGAME::isImpact() {
+    bool B = false;
+    if (cn.isImpact(axt1) || cn.isImpact(axt2) ||
+    cn.isImpact(axh1) || cn.isImpact(axh2) ||
+    cn.isImpact(ac1) || cn.isImpact(ac2) ||
+    cn.isImpact(akl1) || cn.isImpact(akl2)) B = true;
+    if (B) cn.setState(true);
+    return B;
+}
+
 bool CGAME::isFinish() {
     return cn.isFinish(f[levels]);
 }
@@ -203,12 +208,12 @@ int CGAME::getLevel() {
 }
 
 bool CGAME::nextLevel() {
-    if (levels == 4) {
+    levels++;
+    if (levels == 5) {
         cn.setState(true);
         return false;
     }
     else {
-        levels++;
         resetGame();
         return true;
     }

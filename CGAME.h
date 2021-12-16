@@ -21,8 +21,8 @@ class CGAME{
         void drawGame(); //Draw game to screen after getting data
         ~CGAME(); // Release the memory
         CPEOPLE getPeople(); // Get people info
-        CVEHICLE* getVehicle(); // Get vehicle info
-        CANIMAL* getAnimal(); // Get animal info
+        //CVEHICLE* getVehicle(); // Get vehicle info
+        //CANIMAL* getAnimal(); // Get animal info
         void resetGame(); // Reset all data to the initial value
         void exitGame(HANDLE t); // Exit from Thread
         void startGame(); // Start the game
@@ -33,6 +33,8 @@ class CGAME{
         void updatePosPeople(char c); // Movement control
         void updatePosVehicle(); // Change vehicle Position
         void updatePosAnimal(); // Change animal position
+
+        bool isImpact();
         int getLevel();
         bool isFinish();
         bool nextLevel();

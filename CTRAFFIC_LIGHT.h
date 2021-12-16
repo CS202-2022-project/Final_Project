@@ -14,6 +14,8 @@ private:
     int timeInterval;
     int mX, mY;
     int mWidth, mHeight;
+    friend class CPEOPLE;
+    
 public:
     CTRAFFIC_LIGHT();
     CTRAFFIC_LIGHT(int x, int y , int timeInterval);

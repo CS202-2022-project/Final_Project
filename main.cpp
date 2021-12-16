@@ -11,13 +11,16 @@
 #include "CBIRD.h"
 #include "CDINAUSOR.h"
 #include "CGAME.h"
+#include "Menu.h"
 
 using namespace std;
 
 CGAME cg;
 bool IN_GAME = true;
 bool IS_RUNNING = false;
+bool CRASH = false;
 char MOVING = ' ';
+Menu MENU;
 
 void SubThread() {
     while (IN_GAME) { // Still in the menu
@@ -36,19 +39,18 @@ void SubThread() {
             cg.updatePosAnimal();     
 
             cg.drawGame();
-            /*
-            if (cg.getPeople().isImpact(cg.getVehicle()) || cg.getPeople().isImpact(cg.getAnimal())) {
+            
+            if (cg.isImpact()) {
+                IS_RUNNING = false;
+                CRASH = true;
+                break;
+
                 // Impact then playing sound and stuff    
             }
-            */
+            
             if (cg.isFinish()) { // Cross the finish line
                 if (!cg.nextLevel()) {
                     IS_RUNNING = false;
-                    system("cls");
-                    GotoXY(35, 11); 
-                    cout << "Congratulation!! You've cleared the game!!";
-                    GotoXY(35, 12); 
-                    cout << "Press Enter or any key to escape.";
                     break;
                 }
                 else
@@ -65,58 +67,74 @@ int main() {
     int temp;
     FixConsoleWindow();
     hideCursor();
-    thread t1(SubThread); // Create a subthread for updating position
 
+    thread t1(SubThread); // Create a subthread for updating position
 
     while(1){
         // This is where the game take place
         if (cg.getPeople().isDead()) {
-            // Show up menu here
-            // New game
-            // Load game
-            // Settings       
+            // Show up menu here  
             system("cls"); 
-            GotoXY(50, 11); 
-            cout << "Temporary Menu:\n";
-            GotoXY(49, 12);
-            cout << "Press 'Y' to play.\n";
-            GotoXY(43, 13);
-            cout << "Press 'ESC' to quit the game.\n";
+            MENU.draw();
         }
 
-        int temp = toupper(getch());
+        int temp = MENU.updateChoice();
+        if (temp == 0) { // Start new game
+            cg.startGame();
+            IS_RUNNING = true;
+        }
+        else if (temp == 1) { // Load game file
+        }
+        else if (temp == 2) { // Do some settings
+            MENU.drawSettings();
+            MENU.updateSetting();
+        }
+        else if (temp == 3) { // Exit the game
+            IS_RUNNING = false;
+            IN_GAME = false;
+            cg.exitGame((HANDLE)t1.native_handle());
+            break;
+        }
+        
+        if (!cg.getPeople().isDead()) {
+            while (IS_RUNNING) {
+                int temp = toupper(getch());
 
-        if (!cg.getPeople().isDead()) { // ESC means 
-            if (temp == 27) {
-                // Quit to menu screen without pausing
-                IS_RUNNING = false;
-                cg.exitGame((HANDLE)t1.native_handle());
+                if (temp == 'P') {
+                    // Show up some Pause menu here
+                    cg.pauseGame((HANDLE)t1.native_handle());
+                    temp = toupper(getch());
+                    if (temp == 27) { // Quit game
+                        IS_RUNNING = false;
+                        cg.exitGame((HANDLE)t1.native_handle());
+                        system("cls");
+                        break;
+                    }
+                    else { // Resume game
+                        cg.resumeGame((HANDLE)t1.native_handle());
+                    }
+                }
+                else {
+                    // Update movement
+                    MOVING = temp;
+                }
+            }
+            if (CRASH) {
+                // Impact here
                 system("cls");
+                cout << "CRASH";
+                system("pause");
             }
-            else if (temp == 'P') {
-                // Show up some Pause menu here
-                IS_RUNNING = false;
-                cg.pauseGame((HANDLE)t1.native_handle());
-            }
-            else {
-                // Resume game or update movement
-                IS_RUNNING = true;
-                cg.resumeGame((HANDLE)t1.native_handle());
-                MOVING = temp;
-            }
-        }
-        else {
-            // Take some action here and we'll move into the block above
-
-            if (temp == 'Y') { // Start the game, could change 'Y' which choosing option
-                cg.startGame();
-                IS_RUNNING = true;
-            }
-            else if (temp == 27) { // Quit the game, could change 'ESC' which choosing option
-                IS_RUNNING = false;                
-                IN_GAME = false;
-                cg.exitGame((HANDLE)t1.native_handle());
-                break;
+            if (cg.getLevel() == 5) {
+                system("cls");
+                while(1) {
+                    GotoXY(37, 13); 
+                    cout << "Congratulation!! You've cleared the game!!";
+                    GotoXY(41, 14); 
+                    cout << "Press Enter to return to main menu.";
+                    int temp = _getch();
+                    if (temp == KEY_ENTER) break;
+                }                    
             }
         }
     }

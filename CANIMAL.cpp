@@ -16,3 +16,11 @@ int CANIMAL::getX() {
 int CANIMAL::getY() {
     return this->mY;
 }
+void CANIMAL::deDraw(){
+   for(int i=0;i<4;i++)
+    {
+        GotoXY(mX,mY+i);
+        cout<<"     ";
+    }
+}
+

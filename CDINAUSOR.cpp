@@ -12,13 +12,29 @@ CDINAUSOR::CDINAUSOR():CANIMAL(){
     sprite.push_back(temp);
 }
 
-void CDINAUSOR::draw(){
+void CDINAUSOR::Draw(){
 for(int i=0;i<4;i++)
     {
         GotoXY(mX,mY+i);
         cout<<sprite[i];
     }
     
+}
+void CDINAUSOR::Up(int step){
+if (mY - step < Y_START) return;
+	GotoXY(mX, mY);
+	deDraw();
+	mY -= step;
+	GotoXY(mX, mY);
+	Draw();
+}
+void CDINAUSOR::Down(int step){
+if (mX - step < X_START) return;
+	GotoXY(mX, mY);
+	deDraw();
+	mX -= step;
+	GotoXY(mX, mY);
+	Draw();
 }
 void CDINAUSOR::tell(){
     bool played= PlaySound(TEXT("sounds/trex_road.wav"),NULL,SND_ASYNC);

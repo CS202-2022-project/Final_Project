@@ -17,8 +17,11 @@ public:
     void Move(int x, int y);
 	int getX();
 	int getY();
+	void deDraw();
+	virtual void Up(int) =0;
+	virtual void Down(int) =0;
 	virtual void tell() =0;
-	virtual void draw()=0;
+	virtual void Draw()=0;
 	virtual int getWidth() = 0;
 	virtual int getHeight() = 0;
 

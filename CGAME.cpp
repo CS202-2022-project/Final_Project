@@ -115,9 +115,7 @@ CANIMAL* CGAME::getAnimal() {
 }
 */
 
-void CGAME::resetGame() {
-    system("cls");
-
+void CGAME::drawGuide() {
     GotoXY(105, 1);
     cout << "Level: " << levels;
     GotoXY(105, 3);
@@ -132,6 +130,12 @@ void CGAME::resetGame() {
     cout << "D: Go Right";
 
     drawBoard(103, 0, 119, 8);
+}
+
+void CGAME::resetGame() {
+    system("cls");
+
+    drawGuide();
 
     cn.Move(0, 11);
 

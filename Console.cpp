@@ -22,6 +22,14 @@ void TextColor(int x) //ham to mau
 	SetConsoleTextAttribute(clr, x);
 }
 
+int GetColor() {
+	HANDLE clr;
+	clr = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO info;
+	int ret = GetConsoleScreenBufferInfo(clr, &info);
+	return ret;
+}
+
 void hideCursor()
 {
    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);

@@ -13,6 +13,7 @@ const int Y_END = 28;
 void FixConsoleWindow();
 void GotoXY(int x, int y);
 void TextColor(int x); // ham to mau
+int GetColor();
 void hideCursor();
 void clrscr();
 void drawBoard(int xTrai, int yTrai, int xPhai, int yPhai);

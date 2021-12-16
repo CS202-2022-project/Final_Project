@@ -139,10 +139,17 @@ void Menu::updateSetting()
 }
 
 void Menu::drawPauseScreen() {
-	clrscr();
+	//clrscr();
+	int xPivot = CONSOLE_WIDTH / 2;
+	for (int i = xPivot - 10; i <= xPivot + 10; i++) {
+		for (int j = m_y[0] - 5; j <= m_y[1] + 5; j++) {
+			GotoXY(i, j);
+			cout << ' ';
+		}
+	}
+	drawBoard(xPivot - 11, m_y[0] - 3, xPivot + 10, m_y[1] + 3);
 	ShowConsoleCursor(false);
 	for (int i = 0; i < 2; i++) {
-		int xPivot = CONSOLE_WIDTH / 2;
 		drawBoard(xPivot - 6 , m_y[i] - 1, xPivot + 5, m_y[i] + 1);
 		string s = listPause[i];
 		int x = (CONSOLE_WIDTH - s.length()) / 2;

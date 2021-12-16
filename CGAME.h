@@ -23,6 +23,7 @@ class CGAME{
         CPEOPLE getPeople(); // Get people info
         //CVEHICLE* getVehicle(); // Get vehicle info
         //CANIMAL* getAnimal(); // Get animal info
+        void drawGuide(); // Draw Instructions
         void resetGame(); // Reset all data to the initial value
         void exitGame(HANDLE t); // Exit from Thread
         void startGame(); // Start the game

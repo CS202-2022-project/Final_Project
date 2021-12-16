@@ -19,6 +19,7 @@ CGAME cg;
 bool IN_GAME = true;
 bool IS_RUNNING = false;
 bool CRASH = false;
+bool PAUSE = false;
 char MOVING = ' ';
 Menu MENU;
 
@@ -26,6 +27,7 @@ void SubThread() {
     while (IN_GAME) { // Still in the menu
         bool FIRST = true;
         while (IS_RUNNING) { // Still in the game
+            if (PAUSE) continue;
             if (FIRST) { // Draw for first time
                 cg.resetGame();
                 FIRST = false;
@@ -64,6 +66,7 @@ void SubThread() {
 
 int main() {
     //cg.testSprite();
+
     int temp;
     FixConsoleWindow();
     hideCursor();
@@ -98,32 +101,46 @@ int main() {
         
         if (!cg.getPeople().isDead()) {
             while (IS_RUNNING) {
-                int temp = toupper(getch());
+                int temp = getch();
 
-                if (temp == 'P') {
+                if (temp == 'p') {
                     // Show up some Pause menu here
                     cg.pauseGame((HANDLE)t1.native_handle());
-                    temp = toupper(getch());
-                    if (temp == 27) { // Quit game
+                    PAUSE = true;
+                    Sleep(100); // Add buffer for showing up menu
+                    
+                    TextColor(7);
+                    MENU.drawPauseScreen();
+                    int pChoice = MENU.updatePause();
+
+                    TextColor(7);
+                    system("cls");
+                    cg.getPeople().Draw();
+                    cg.drawGuide();
+                    PAUSE = false;
+
+                    if (pChoice == 0) {
+                        cg.resumeGame((HANDLE)t1.native_handle());
+                    }
+                    else {
                         IS_RUNNING = false;
                         cg.exitGame((HANDLE)t1.native_handle());
                         system("cls");
-                        break;
-                    }
-                    else { // Resume game
-                        cg.resumeGame((HANDLE)t1.native_handle());
+                        break;                        
                     }
                 }
                 else {
                     // Update movement
-                    MOVING = temp;
+                    MOVING = toupper(temp);
                 }
+                //Sleep(20); // Add Buffer to movement
             }
             if (CRASH) {
                 // Impact here
                 system("cls");
                 cout << "CRASH";
                 system("pause");
+                CRASH = false;
             }
             if (cg.getLevel() == 5) {
                 system("cls");

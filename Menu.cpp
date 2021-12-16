@@ -40,8 +40,6 @@ int Menu::updateChoice()
 {	
 	int i = 0;
 	while (1) {
-		//GotoXy(m_x - 1, m_y[i]);
-		//printf("%c", 175);
 		int x = (CONSOLE_WIDTH - m_list[i].length()) / 2;
 		GotoXY(x, m_y[i]);
 		TextColor(14);
@@ -230,7 +228,6 @@ int Menu::updatePause() {
 		default: break;
 		}
 	}
-
 }
 
 

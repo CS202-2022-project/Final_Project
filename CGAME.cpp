@@ -173,11 +173,11 @@ void CGAME::startGame() {
     cn.setState(false);
 }
 
-void CGAME::loadGame(istream) {
+void CGAME::loadGame(int id) {
 
 }
 
-void CGAME::saveGame(istream) {
+void CGAME::saveGame(int id) {
 
 }
 

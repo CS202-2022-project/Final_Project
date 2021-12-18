@@ -137,6 +137,9 @@ int main() {
                         break;                        
                     }
                 }
+                else if (temp == 'l') {
+                    // Show up the save slots
+                }
                 else {
                     // Update movement
                     MOVING = toupper(temp);
@@ -148,8 +151,14 @@ int main() {
                 Sleep(2000);
                 if (PLAYSOUND)
                     playSound("sounds/super-mario-death-sound-sound-effect.wav");
-                system("cls");
+                //system("cls");
                 while(1) {
+                    for (int x = 38; x <= 78; x++)
+                        for (int y = 11; y <= 16; y++) {
+                            GotoXY(x, y);
+                            cout << ' ';
+                        }
+                    drawBoard(38, 11, 78, 16);
                     GotoXY(52, 13); 
                     cout << "You're Dead!!";
                     GotoXY(41, 14); 
@@ -160,8 +169,16 @@ int main() {
                 CRASH = false;
             }
             if (cg.getLevel() == 5) {
-                system("cls");
+                //system("cls");
+                if (PLAYSOUND)
+                    playSound("sounds/winning_sound.wav");
                 while(1) {
+                    for (int x = 33; x <= 81; x++)
+                        for (int y = 11; y <= 16; y++) {
+                            GotoXY(x, y);
+                            cout << ' ';
+                        }
+                    drawBoard(33, 11, 81, 16);
                     GotoXY(37, 13); 
                     cout << "Congratulation!! You've cleared the game!!";
                     GotoXY(41, 14); 

@@ -27,8 +27,8 @@ class CGAME{
         void resetGame(); // Reset all data to the initial value
         void exitGame(HANDLE t); // Exit from Thread
         void startGame(); // Start the game
-        void loadGame(istream); // Load the game
-        void saveGame(istream); // Save the game
+        void loadGame(int id); // Load the game
+        void saveGame(int id); // Save the game
         void pauseGame(HANDLE t); // Pause the Thread
         void resumeGame(HANDLE t); // Resume the Thread
         void updatePosPeople(char c); // Movement control
@@ -45,6 +45,7 @@ class CGAME{
     protected:
         unsigned int Cycle = 0;
         int levels = 1;
+        bool b[3] = {false, false, false};
         int f[5] = {0, 23, 54, 75, 96};
         CTRAFFIC_LIGHT adxh1, adxh2, adxt1, adxt2;
         CTRUCK* axt1 = nullptr, *axt2 = nullptr;

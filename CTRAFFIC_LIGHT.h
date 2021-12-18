@@ -23,6 +23,10 @@ public:
     void draw(char);
     void updateState(char ch);
     bool isRed();
+    int getcountingTime();
+    int gettimeInterval();
+    int getstate();
+    void updateLoadTraffic(int, int, int);
 };
 
 #endif

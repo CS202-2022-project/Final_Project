@@ -72,3 +72,18 @@ void CTRAFFIC_LIGHT::increaseTime(){
 bool CTRAFFIC_LIGHT::isRed(){
     return this->state == COLOR::red;
 }
+
+int CTRAFFIC_LIGHT::getcountingTime() {
+    return coutingTime;
+}
+int CTRAFFIC_LIGHT::getstate() {
+    return state;
+}
+int CTRAFFIC_LIGHT::gettimeInterval() {
+    return timeInterval;
+}
+void CTRAFFIC_LIGHT::updateLoadTraffic(int state,int countingTime,int timeInterval) {
+    this->state = state;
+    this->coutingTime = countingTime;
+    this->timeInterval = timeInterval;
+}

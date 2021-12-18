@@ -12,7 +12,7 @@
 #include "Console.h"
 #include "winnt.h"
 #include <iostream>
-
+#include<fstream>
 using namespace std;
 
 class CGAME{
@@ -27,8 +27,8 @@ class CGAME{
         void resetGame(); // Reset all data to the initial value
         void exitGame(HANDLE t); // Exit from Thread
         void startGame(); // Start the game
-        void loadGame(int id); // Load the game
-        void saveGame(int id); // Save the game
+        void loadGame(); // Load the game
+        void saveGame(); // Save the game
         void pauseGame(HANDLE t); // Pause the Thread
         void resumeGame(HANDLE t); // Resume the Thread
         void updatePosPeople(char c); // Movement control

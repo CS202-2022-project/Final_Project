@@ -7,6 +7,13 @@ CPEOPLE::CPEOPLE() {
 	sprite.push_back("--|--");
 	sprite.push_back(" / \\ ");
 };
+
+int CPEOPLE::getX(){
+	return mX;
+}
+int CPEOPLE::getY(){
+	return mY;
+}
 void CPEOPLE::Draw() {
 	int y = mY;
 	for (int i = 0; i < 3; i++)

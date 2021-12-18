@@ -22,6 +22,7 @@ bool CRASH = false;
 bool PAUSE = false;
 bool PLAYSOUND = false;
 char MOVING = ' ';
+bool ISLOAD= false;
 Menu MENU;
 
 void SubThread() {
@@ -32,6 +33,10 @@ void SubThread() {
             if (FIRST) { // Draw for first time
                 cg.resetGame();
                 FIRST = false;
+                if(ISLOAD){
+                    ISLOAD=false;
+                    cg.loadGame();
+                }
             }
             if (MOVING != ' ')
                 cg.updatePosPeople(MOVING);
@@ -91,6 +96,9 @@ int main() {
         }
         else if (temp == 1) { // Load game file
             // To be added...
+            cg.startGame();
+            IS_RUNNING = true;
+            ISLOAD = true;
         }
         else if (temp == 2) { // Do some settings
             MENU.drawSettings();
@@ -139,6 +147,7 @@ int main() {
                 }
                 else if (temp == 'l') {
                     // Show up the save slots
+                    cg.saveGame();
                 }
                 else {
                     // Update movement

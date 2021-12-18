@@ -173,12 +173,84 @@ void CGAME::startGame() {
     cn.setState(false);
 }
 
-void CGAME::loadGame(int id) {
-
+void CGAME::loadGame() {
+  ifstream fin;
+    int x,y,state,countingTime,timeInterval;
+    fin.open("savegame.txt");
+    if(fin.is_open()){
+        if(!fin.eof())
+        {
+        system("cls");
+        drawGuide();
+        fin>>levels;
+        fin>>x;fin>>y;
+        axt1->move(x,y);
+        fin>>x;fin>>y;
+        axt2->move(x,y);
+        fin>>x; fin>>y;
+        axh1->move(x,y);
+        fin>>x;fin>>y;
+        axh2->move(x,y);
+        fin>>x;fin>>y;
+        akl1->Move(x,y);
+        fin>>x;fin>>y;
+        akl2->Move(x,y);
+        fin>>x;fin>>y;
+        ac1->Move(x,y);
+        fin>>x;fin>>y;
+        ac2->Move(x,y);
+        fin>>x;fin>>y;
+        cn.Move(x,y);
+        fin >> state; fin >> countingTime; fin >> timeInterval;
+        adxh1.updateLoadTraffic(state, countingTime, timeInterval);
+        fin >> state; fin >> countingTime; fin >> timeInterval;
+        adxh2.updateLoadTraffic(state, countingTime, timeInterval);
+        fin >> state; fin >> countingTime; fin >> timeInterval;
+        adxt1.updateLoadTraffic(state, countingTime, timeInterval);
+        fin >> state; fin >> countingTime; fin >> timeInterval;
+        adxt2.updateLoadTraffic(state, countingTime, timeInterval);
+        }
+    }
+    fin.close();
 }
 
-void CGAME::saveGame(int id) {
-
+void CGAME::saveGame() {
+ ofstream fout;
+    fout.open("savegame.txt");
+    if (fout.is_open()) {
+        fout << levels << endl;
+        fout<<axt1->getX()<<endl;
+        fout<<axt1->getY()<<endl;
+        fout<<axt2->getX()<<endl;
+        fout<<axt2->getY()<<endl;
+        fout<<axh1->getX()<<endl;
+        fout<<axh1->getY()<<endl;
+        fout<<axh2->getX()<<endl;
+        fout<<axh2->getY()<<endl;
+        fout<<akl1->getX()<<endl;
+        fout<<akl1->getY()<<endl;
+        fout<<akl2->getX()<<endl;
+        fout<<akl2->getY()<<endl;
+        fout<<ac1->getX()<<endl;
+        fout<<ac1->getY()<<endl;
+        fout<<ac2->getX()<<endl;
+        fout<<ac2->getY()<<endl;
+        fout<<cn.getX()<<endl;
+        fout<<cn.getY()<<endl;
+        fout << adxh1.getstate() << endl;
+        fout << adxh1.getcountingTime() << endl;
+        fout << adxh1.gettimeInterval() << endl;
+        fout << adxh2.getstate() << endl;
+        fout << adxh2.getcountingTime() << endl;
+        fout << adxh2.gettimeInterval() << endl;
+        fout << adxt1.getstate() << endl;
+        fout << adxt1.getcountingTime() << endl;
+        fout << adxt1.gettimeInterval() << endl;
+        fout << adxt2.getstate() << endl;
+        fout << adxt2.getcountingTime() << endl;
+        fout << adxt2.gettimeInterval() << endl;
+    }
+    fout.close();
 }
 
 void CGAME::pauseGame(HANDLE t) {

@@ -13,6 +13,8 @@ class CPEOPLE {
 	bool mState;
 public:
 	CPEOPLE();
+	int getX();
+	int getY();
 	void deDraw();
 	void Draw();
 	void Up(int);

@@ -34,6 +34,7 @@ class CGAME{
         void updatePosPeople(char c); // Movement control
         void updatePosVehicle(); // Change vehicle Position
         void updatePosAnimal(); // Change animal position
+        void updateLight(); // Update traffic light
 
         bool isImpact(bool PLAYSOUND);
         int getLevel();
@@ -44,12 +45,13 @@ class CGAME{
     protected:
         unsigned int Cycle = 0;
         int levels = 1;
-        int f[5] = {0, 21, 52, 73, 94};
+        int f[5] = {0, 23, 54, 75, 96};
+        CTRAFFIC_LIGHT adxh1, adxh2, adxt1, adxt2;
         CTRUCK* axt1 = nullptr, *axt2 = nullptr;
         CCAR* axh1 = nullptr, *axh2 = nullptr;
         CDINAUSOR* akl1 = nullptr, *akl2 = nullptr;
         CBIRD* ac1 = nullptr, *ac2 = nullptr;
-        CPEOPLE cn;        
+        CPEOPLE cn; 
 };
 
 #endif

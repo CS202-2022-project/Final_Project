@@ -14,6 +14,11 @@ CGAME::CGAME() {
 
     akl1 = new CDINAUSOR;
     akl2 = new CDINAUSOR;
+
+    adxh1 = CTRAFFIC_LIGHT(5, 1, 100);
+    adxh2 = CTRAFFIC_LIGHT(20, 29, 90);
+    adxt1 = CTRAFFIC_LIGHT(26, 1, 80);
+    adxt2 = CTRAFFIC_LIGHT(51, 29, 70);
 }
 
 void CGAME::drawGame() { 
@@ -92,6 +97,14 @@ void CGAME::drawGame() {
                 TextColor(0); cout << ' ';
             }
         }
+
+    // Draw traffic light 
+    adxh1.draw(254); 
+    adxh2.draw(254);
+    if (levels >= 2) {
+        adxt1.draw(254); 
+        adxt2.draw(254);
+    }
 
     TextColor(7); // Reset Colour        
 }
@@ -185,9 +198,31 @@ void CGAME::updatePosPeople(char c) {
 
 void CGAME::updatePosVehicle() {
     Cycle++;
-
+    if (!adxh1.isRed()) { // Green light
+        if (Cycle % 6 == 0) {
+            axh1 -> deDraw();
+            if (!axh1 -> Down(1)) axh1 -> move(7, 0);
+        }
+    }
+    if (!adxh2.isRed()) {
+        if (Cycle % 5 == 0) {
+            axh2 -> deDraw();                      
+            if (!axh2 -> Up(1)) axh2 -> move(14, 28);
+        }
+    }
     if (levels >= 2) { // Truck
-
+        if (!adxt1.isRed()) {
+            if (Cycle % 6 == 0) {
+                axt1 -> deDraw();
+                if (!axt1 -> Down(1)) axt1 -> move(28, 0);
+            }
+        }
+        if (!adxt2.isRed()) {
+            if (Cycle % 5 == 0) {
+                axt2 -> deDraw();                      
+                if (!axt2 -> Up(1)) axt2 -> move(40, 26);
+            }
+        }
     }
 }
 
@@ -211,6 +246,16 @@ void CGAME::updatePosAnimal() {
             akl2 -> deDraw();                      
             if (!akl2 -> Up(3)) akl2 -> Move(87, 26);
         }
+    }
+}
+
+void CGAME::updateLight() {
+    adxh1.increaseTime();
+    adxh2.increaseTime();
+
+    if (levels >= 2) {
+        adxt1.increaseTime();
+        adxt2.increaseTime();
     }
 }
 

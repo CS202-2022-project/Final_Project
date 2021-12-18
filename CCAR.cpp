@@ -19,6 +19,25 @@ CCAR::CCAR(int x, int y){
     sprite.push_back("/___\\");
 }
 
+bool CCAR::Up(int step){
+if (mY - step < Y_START) return false;
+	GotoXY(mX, mY);
+	deDraw();
+	mY -= step;
+	GotoXY(mX, mY);
+	draw();
+    return true;
+}
+bool CCAR::Down(int step){
+if (mY + step + 1 > Y_END) return false;
+	GotoXY(mX, mY);
+	deDraw();
+	mY += step;
+	GotoXY(mX, mY);
+	draw();
+    return true;
+}
+
 void CCAR::draw(){
     std::vector<std::string>::iterator ptr;
     int i = 0;

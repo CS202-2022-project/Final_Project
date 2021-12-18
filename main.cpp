@@ -40,6 +40,7 @@ void SubThread() {
             // Update pos according to time cycle
             cg.updatePosVehicle();
             cg.updatePosAnimal();     
+            cg.updateLight();
 
             cg.drawGame();
             

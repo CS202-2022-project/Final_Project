@@ -10,6 +10,8 @@ public:
     void draw();
     int getWidth();
     int getHeight();
+    bool Up(int);
+    bool Down(int);
     void deDraw();
     //void updatePos(int, int);
 private:

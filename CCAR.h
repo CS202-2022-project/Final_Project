@@ -12,6 +12,8 @@ public:
     int getWidth();
     int getHeight();
     void deDraw();
+    bool Up(int);
+    bool Down(int);
     //void updatePos(int, int);
 private:
     //std::vector<std::string> sprite ;

@@ -14,6 +14,8 @@ public:
     void move(int x, int y);
     virtual void draw() = 0;
     virtual void deDraw() = 0;
+    virtual bool Up(int) = 0;
+	virtual bool Down(int) = 0;
     int getX();
     int getY();
     virtual int getWidth() = 0;

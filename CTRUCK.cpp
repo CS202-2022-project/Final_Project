@@ -22,6 +22,25 @@ CTRUCK::CTRUCK(int x, int y){
     sprite.push_back("|__o__o__|");
 }
 
+bool CTRUCK::Up(int step){
+if (mY - step < Y_START) return false;
+	GotoXY(mX, mY);
+	deDraw();
+	mY -= step;
+	GotoXY(mX, mY);
+	draw();
+    return true;
+}
+bool CTRUCK::Down(int step){
+if (mY + step + 2 > Y_END) return false;
+	GotoXY(mX, mY);
+	deDraw();
+	mY += step;
+	GotoXY(mX, mY);
+	draw();
+    return true;
+}
+
 void CTRUCK::draw(){
     vector<std::string>::iterator ptr;
     int i = 0;

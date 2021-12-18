@@ -237,10 +237,63 @@ int Menu::updatePause() {
 	}
 }
 
-int Menu::updateSave(){
+int Menu::drawAndUpdateSave(bool b[3]) {
+	clrscr();
+	ShowConsoleCursor(false);
+	//drawTitle();
+	int xPivot = CONSOLE_WIDTH / 2;
+	string str = "       LOAD GAME      ";
+	GotoXY((CONSOLE_WIDTH - str.length()) / 2, m_y[0] - 3);
+	TextColor(31);  printf("%s", str.c_str()); TextColor(15);
+	for (int i = 0; i < 3; i++) {
+		int xPivot = CONSOLE_WIDTH / 2;
+		drawBoard(xPivot - 8, m_y[i] - 1, xPivot + 7, m_y[i] + 1);
+		string slotI = "Slot " + to_string(i+1);
+		string s = b[i] ? slotI : "Empty ";
+		int x = (CONSOLE_WIDTH - s.length()) / 2;
+		GotoXY(x, m_y[i]);
+		printf("%s", s.c_str());
+	}
 	
-
+	int i = 0;
+	while (1) {
+		int x = (CONSOLE_WIDTH - 6) / 2;
+		GotoXY(x, m_y[i]);
+		TextColor(14);
+		string slotI = "Slot " + to_string(i+1);
+		string s = b[i] ? slotI : "Empty ";
+		printf("%s", s.c_str());
+		switch (_getch()) {
+		case KEY_UP: {
+			if (i > 0)
+			{
+				GotoXY(x, m_y[i]);
+				TextColor(15);
+				string slotI = "Slot " + to_string(i+1);
+				string s = b[i] ? slotI : "Empty ";
+				printf("%s", s.c_str());
+				i--;
+			}
+			break;
+		}
+		case KEY_DOWN: {
+			if (i < 2) {
+				GotoXY(x, m_y[i]);
+				TextColor(15);
+				string slotI = "Slot " + to_string(i+1);
+				string s = b[i] ? slotI : "Empty ";
+				printf("%s", s.c_str());
+				i++;
+			}
+			break;
+		}
+		case KEY_ENTER: {
+			TextColor(15);
+			return i;
+		}
+		default: break;
+		}
+	}
 }
-
 
 			

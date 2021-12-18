@@ -60,4 +60,6 @@ public:
 	void drawSettings();
 	pair<int,int> updateSetting();
 	int updatePause();
+	void drawSave();
+	int updateSave(bool b[3]);
 };

@@ -296,4 +296,56 @@ int Menu::drawAndUpdateSave(bool b[3]) {
 	}
 }
 
+int Menu::drawAndUpdateRetry() {
+	// draw
+	clrscr();
+	ShowConsoleCursor(false);
+	//drawTitle();
+	for (int i = 0; i < 2; i++) {
+		int xPivot = CONSOLE_WIDTH / 2;
+		drawBoard(xPivot - 9, m_y[i] - 1, xPivot + 8, m_y[i] + 1);
+		string s = retryScreen[i];
+		int x = (CONSOLE_WIDTH - s.length()) / 2;
+		GotoXY(x, m_y[i]);
+		printf("%s", s.c_str());
+	}
+
+	//update
+	int i = 0;
+	while (1) {
+		int x = (CONSOLE_WIDTH - retryScreen[i].length()) / 2;
+		GotoXY(x, m_y[i]);
+		TextColor(14);
+		printf("%s", retryScreen[i].c_str());
+		switch (_getch()) {
+		case KEY_UP: {
+			if (i > 0)
+			{
+				GotoXY(x, m_y[i]);
+				TextColor(15);
+				printf("%s", retryScreen[i].c_str());
+				i--;
+			}
+			break;
+		}
+		case KEY_DOWN: {
+			if (i < 2 - 1) {
+				GotoXY(x, m_y[i]);
+				TextColor(15);
+				printf("%s", retryScreen[i].c_str());
+				i++;
+			}
+			break;
+		}
+		case KEY_ENTER: {
+			TextColor(15);
+			return i;
+		}
+		default: break;
+		}
+	}
+
+
+}
+
 			

@@ -48,6 +48,7 @@ private:
 	string m_list[MAX_CHOICE] = { "New Game", " Load Game", "Settings", "Exit" };
 	string m_settingList[2] = { "Level", "Music" };
 	string level[4] = {"<1>","<2>","<3>","<4>" };
+	string retryScreen[2] = {"Retry","Return to menu"};
 	int m_x;
 	int m_y[MAX_CHOICE] = { 12, 16, 20, 24 };
 	void drawTitle();
@@ -62,4 +63,5 @@ public:
 	int updatePause();
 	//void drawSave();
 	int drawAndUpdateSave(bool b[3]);
+	int drawAndUpdateRetry();
 };

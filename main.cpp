@@ -14,7 +14,7 @@
 #include "Menu.h"
 
 using namespace std;
-
+int startLevel=1;
 CGAME cg;
 bool IN_GAME = true;
 bool IS_RUNNING = false;
@@ -101,6 +101,7 @@ int main() {
             MENU.drawSettings();
             pair<int, int> p = MENU.updateSetting();
             cg.setLevel(p.first);
+            startLevel=p.first;
             PLAYSOUND = p.second;
         }
         else if (temp == 3) { // Exit the game
@@ -110,7 +111,7 @@ int main() {
             break;
         }
         
-        if (!cg.getPeople().isDead()) {
+        while (!cg.getPeople().isDead()) {
             if (PLAYSOUND)
                 playSound("sounds/In_game.wav");
             while (IS_RUNNING) {
@@ -139,6 +140,7 @@ int main() {
                         IS_RUNNING = false;
                         cg.exitGame((HANDLE)t1.native_handle());
                         //system("cls");
+	                    cg.setLevel(startLevel);
                         PAUSE = false;
                         break;                        
                     }
@@ -213,7 +215,6 @@ int main() {
                     playSound("sounds/super-mario-death-sound-sound-effect.wav");                
                 cg.playDeathAnimation();                 
                 //system("cls");
-                while(1) {
                     for (int x = 38; x <= 78; x++)
                         for (int y = 11; y <= 16; y++) {
                             GotoXY(x, y);
@@ -222,12 +223,27 @@ int main() {
                     drawBoard(38, 11, 78, 16);
                     GotoXY(52, 13); 
                     cout << "You're Dead!!";
-                    GotoXY(41, 14); 
+                    /*GotoXY(41, 14); 
                     cout << "Press Enter to return to main menu.";
                     int temp = _getch();
-                    if (temp == KEY_ENTER) break;
-                }        
-                cg.setLevel(1);
+                    if (temp == KEY_ENTER) break;*/
+                    Sleep(1000);
+                    system("cls");
+                    int dChoice=MENU.drawAndUpdateRetry(); 
+                    if (dChoice == 0) {
+                         cg.startGame();
+                         FIRST =true;
+                         IS_RUNNING=true;
+                         CRASH = false;
+                         continue;
+                    }
+                    else {
+                        IS_RUNNING = false;
+                        cg.exitGame((HANDLE)t1.native_handle());
+                        //system("cls");
+                        cg.setLevel(startLevel);                      
+                    }       
+                cg.setLevel(startLevel);
                 CRASH = false;
             }
             if (cg.getLevel() == 5) {
@@ -249,7 +265,7 @@ int main() {
                     int temp = _getch();
                     if (temp == KEY_ENTER) break;
                 }                    
-                cg.setLevel(1);
+                cg.setLevel(startLevel);
             }
         }
     }

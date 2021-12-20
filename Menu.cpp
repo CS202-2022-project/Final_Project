@@ -242,7 +242,7 @@ int Menu::drawAndUpdateSave(bool b[3]) {
 	ShowConsoleCursor(false);
 	//drawTitle();
 	int xPivot = CONSOLE_WIDTH / 2;
-	string str = "       LOAD GAME      ";
+	string str = "       SAVE SLOTS      ";
 	GotoXY((CONSOLE_WIDTH - str.length()) / 2, m_y[0] - 3);
 	TextColor(31);  printf("%s", str.c_str()); TextColor(15);
 	for (int i = 0; i < 3; i++) {

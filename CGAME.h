@@ -27,8 +27,10 @@ class CGAME{
         void resetGame(); // Reset all data to the initial value
         void exitGame(HANDLE t); // Exit from Thread
         void startGame(); // Start the game
-        void loadGame(); // Load the game
-        void saveGame(); // Save the game
+        void loadGame(int slot); // Load the game
+        void saveGame(int slot); // Save the game
+        bool* getSaveSlot();
+        void setSaveSlot(int s);
         void pauseGame(HANDLE t); // Pause the Thread
         void resumeGame(HANDLE t); // Resume the Thread
         void updatePosPeople(char c); // Movement control

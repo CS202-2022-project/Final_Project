@@ -48,8 +48,6 @@ void SubThread() {
                 IS_RUNNING = false;
                 CRASH = true;
                 break;
-
-                // Impact then playing sound and stuff    
             }
             
             if (cg.isFinish()) { // Cross the finish line
@@ -57,8 +55,6 @@ void SubThread() {
                     IS_RUNNING = false;
                     break;
                 }
-                else
-                    FIRST = true;
             }
             //Sleep(100);
         }    
@@ -130,17 +126,18 @@ int main() {
 
                     TextColor(7);
                     system("cls");
-                    cg.getPeople().Draw();
-                    cg.drawGuide();
-                    PAUSE = false;
 
                     if (pChoice == 0) {
                         cg.resumeGame((HANDLE)t1.native_handle());
+                        cg.getPeople().Draw();
+                        cg.drawGuide();
+                        PAUSE = false;
                     }
                     else {
                         IS_RUNNING = false;
                         cg.exitGame((HANDLE)t1.native_handle());
-                        system("cls");
+                        //system("cls");
+                        PAUSE = false;
                         break;                        
                     }
                 }
@@ -173,8 +170,8 @@ int main() {
                 Sleep(2000);
                 // Need to add animation here
                 if (PLAYSOUND)
-                    playSound("sounds/super-mario-death-sound-sound-effect.wav");
-                Sleep(4000);                    
+                    playSound("sounds/super-mario-death-sound-sound-effect.wav");                
+                cg.playDeathAnimation();                 
                 //system("cls");
                 while(1) {
                     for (int x = 38; x <= 78; x++)

@@ -29,8 +29,8 @@ class CGAME{
         void startGame(); // Start the game
         void loadGame(int slot); // Load the game
         void saveGame(int slot); // Save the game
-        bool* getSaveSlot();
-        void setSaveSlot(int s);
+        bool* getSaveSlot(); // Return the state of the save slots
+        void setSaveSlot(int s); // Set the state of the save slot
         void pauseGame(HANDLE t); // Pause the Thread
         void resumeGame(HANDLE t); // Resume the Thread
         void updatePosPeople(char c); // Movement control
@@ -38,12 +38,13 @@ class CGAME{
         void updatePosAnimal(); // Change animal position
         void updateLight(); // Update traffic light
 
-        bool isImpact(bool PLAYSOUND);
-        int getLevel();
-        void setLevel(int x);
-        bool isFinish();
-        bool nextLevel();
-        void testSprite();
+        bool isImpact(bool PLAYSOUND); // Check if the person is impacting other objects
+        int getLevel(); // return the current level
+        void setLevel(int x); // set the current level
+        bool isFinish(); // Check if the person crossed the finish line
+        bool nextLevel(); // Go to the next level
+        void playDeathAnimation(); // Play death animation
+        void testSprite(); // Just for testing 
     protected:
         unsigned int Cycle = 0;
         int levels = 1;

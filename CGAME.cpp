@@ -479,6 +479,20 @@ bool CGAME::nextLevel() {
     }
 }
 
+void CGAME::playDeathAnimation() {
+    Sleep(1300);
+    for (int i = 0; i <= 12; i++) {
+        cn.Up(1);
+        Sleep(80 - 6 * i);
+    }
+    Sleep(100);
+    for (int i = 0; i <= 27; i++) {
+        cn.Down(1);
+        Sleep(max(80 - 4 * i, 2));
+    }
+    cn.deDraw();
+}
+
 // -------------------------------
 
 void CGAME::testSprite() {

@@ -1,4 +1,5 @@
 #include "CGAME.h"
+#include "conio.h"
 
 CGAME::CGAME() {
     levels = 1;
@@ -116,6 +117,67 @@ CGAME::~CGAME() {
     delete akl1, akl2;
 }
 
+void CGAME::loadData() {
+    ifstream fin("SaveState.txt");
+    if (fin.is_open()) {
+        for (int i = 0; i < 3; i++)
+            fin >> b[i];
+    }
+    fin.close();
+
+    char c = 254;
+
+    GotoXY(60, 9);
+    cout << "0%";
+    drawBoard(30, 12, 90, 14);
+
+    Sleep(500);
+    GotoXY(60, 9);
+    cout << "25%";
+    for (int x = 31; x <= 45; x++) {
+        GotoXY(x, 13);
+        cout << c;
+    }
+
+    Sleep(500);
+    GotoXY(60, 9);
+    cout << "50%";
+    for (int x = 46; x <= 60; x++) {
+        GotoXY(x, 13);
+        cout << c;
+    }  
+
+    Sleep(500);
+    GotoXY(60, 9);
+    cout << "75%";
+    for (int x = 61; x <= 75; x++) {
+        GotoXY(x, 13);
+        cout << c;
+    } 
+
+    Sleep(500);
+    GotoXY(60, 9);
+    cout << "100%";
+    for (int x = 76; x <= 89; x++) {
+        GotoXY(x, 13);
+        cout << c;
+    }     
+
+    GotoXY(40, 16);
+    cout << "Loading complete, press any key to continue.";
+    _getch();
+    system("cls");
+}
+
+void CGAME::saveData() {
+    ofstream fout("SaveState.txt");
+    if (fout.is_open()) {
+        for (int i = 0; i < 3; i++)
+            fout << b[i] << ' ';
+    }
+    fout.close();        
+}
+
 CPEOPLE CGAME::getPeople() {
     return cn;
 }
@@ -173,84 +235,187 @@ void CGAME::startGame() {
     cn.setState(false);
 }
 
-void CGAME::loadGame() {
+// Change to binary with ios::binary
+void CGAME::loadGame(int slot) {
   ifstream fin;
     int x,y,state,countingTime,timeInterval;
-    fin.open("savegame.txt");
+    fin.open("saves/SaveFile" + to_string(slot) + ".txt", ios::binary);
     if(fin.is_open()){
         if(!fin.eof())
         {
         system("cls");
         drawGuide();
-        fin>>levels;
-        fin>>x;fin>>y;
+        //fin>>levels;
+        fin.read((char*)&levels, sizeof(levels));
+        //fin>>x;fin>>y;
+        fin.read((char*)&x, sizeof(x));
+        fin.read((char*)&y, sizeof(y));
         axt1->move(x,y);
-        fin>>x;fin>>y;
+        //fin>>x;fin>>y;
+        fin.read((char*)&x, sizeof(x));
+        fin.read((char*)&y, sizeof(y));        
         axt2->move(x,y);
-        fin>>x; fin>>y;
+        //fin>>x; fin>>y;
+        fin.read((char*)&x, sizeof(x));
+        fin.read((char*)&y, sizeof(y));        
         axh1->move(x,y);
-        fin>>x;fin>>y;
+        //fin>>x;fin>>y;
+        fin.read((char*)&x, sizeof(x));
+        fin.read((char*)&y, sizeof(y));        
         axh2->move(x,y);
-        fin>>x;fin>>y;
+        //fin>>x;fin>>y;
+        fin.read((char*)&x, sizeof(x));
+        fin.read((char*)&y, sizeof(y));        
         akl1->Move(x,y);
-        fin>>x;fin>>y;
+        //fin>>x;fin>>y;
+        fin.read((char*)&x, sizeof(x));
+        fin.read((char*)&y, sizeof(y));           
         akl2->Move(x,y);
-        fin>>x;fin>>y;
+        //fin>>x;fin>>y;
+        fin.read((char*)&x, sizeof(x));
+        fin.read((char*)&y, sizeof(y));           
         ac1->Move(x,y);
-        fin>>x;fin>>y;
+        //fin>>x;fin>>y;
+        fin.read((char*)&x, sizeof(x));
+        fin.read((char*)&y, sizeof(y));           
         ac2->Move(x,y);
-        fin>>x;fin>>y;
+        //fin>>x;fin>>y;
+        fin.read((char*)&x, sizeof(x));
+        fin.read((char*)&y, sizeof(y));           
         cn.Move(x,y);
-        fin >> state; fin >> countingTime; fin >> timeInterval;
+        //fin >> state; fin >> countingTime; fin >> timeInterval;
+        fin.read((char*)&state, sizeof(state));
+        fin.read((char*)&countingTime, sizeof(countingTime));
+        fin.read((char*)&timeInterval, sizeof(timeInterval));
         adxh1.updateLoadTraffic(state, countingTime, timeInterval);
-        fin >> state; fin >> countingTime; fin >> timeInterval;
+        //fin >> state; fin >> countingTime; fin >> timeInterval;
+        fin.read((char*)&state, sizeof(state));
+        fin.read((char*)&countingTime, sizeof(countingTime));
+        fin.read((char*)&timeInterval, sizeof(timeInterval));        
         adxh2.updateLoadTraffic(state, countingTime, timeInterval);
-        fin >> state; fin >> countingTime; fin >> timeInterval;
+        //fin >> state; fin >> countingTime; fin >> timeInterval;
+        fin.read((char*)&state, sizeof(state));
+        fin.read((char*)&countingTime, sizeof(countingTime));
+        fin.read((char*)&timeInterval, sizeof(timeInterval));                
         adxt1.updateLoadTraffic(state, countingTime, timeInterval);
-        fin >> state; fin >> countingTime; fin >> timeInterval;
+        //fin >> state; fin >> countingTime; fin >> timeInterval;
+        fin.read((char*)&state, sizeof(state));
+        fin.read((char*)&countingTime, sizeof(countingTime));
+        fin.read((char*)&timeInterval, sizeof(timeInterval));                
         adxt2.updateLoadTraffic(state, countingTime, timeInterval);
         }
     }
     fin.close();
 }
 
-void CGAME::saveGame() {
+// Change to binary with ios::binary
+void CGAME::saveGame(int slot) {
  ofstream fout;
-    fout.open("savegame.txt");
+    int x,y,state,countingTime,timeInterval;
+    fout.open("saves/SaveFile" + to_string(slot) + ".txt", ios::binary);
     if (fout.is_open()) {
-        fout << levels << endl;
-        fout<<axt1->getX()<<endl;
-        fout<<axt1->getY()<<endl;
-        fout<<axt2->getX()<<endl;
-        fout<<axt2->getY()<<endl;
-        fout<<axh1->getX()<<endl;
-        fout<<axh1->getY()<<endl;
-        fout<<axh2->getX()<<endl;
-        fout<<axh2->getY()<<endl;
-        fout<<akl1->getX()<<endl;
-        fout<<akl1->getY()<<endl;
-        fout<<akl2->getX()<<endl;
-        fout<<akl2->getY()<<endl;
-        fout<<ac1->getX()<<endl;
-        fout<<ac1->getY()<<endl;
-        fout<<ac2->getX()<<endl;
-        fout<<ac2->getY()<<endl;
-        fout<<cn.getX()<<endl;
-        fout<<cn.getY()<<endl;
-        fout << adxh1.getstate() << endl;
-        fout << adxh1.getcountingTime() << endl;
-        fout << adxh1.gettimeInterval() << endl;
-        fout << adxh2.getstate() << endl;
-        fout << adxh2.getcountingTime() << endl;
-        fout << adxh2.gettimeInterval() << endl;
-        fout << adxt1.getstate() << endl;
-        fout << adxt1.getcountingTime() << endl;
-        fout << adxt1.gettimeInterval() << endl;
-        fout << adxt2.getstate() << endl;
-        fout << adxt2.getcountingTime() << endl;
-        fout << adxt2.gettimeInterval() << endl;
+        // fout << levels << endl;
+        fout.write((char*)&levels, sizeof(levels));
+        // fout<<axt1->getX()<<endl;
+        // fout<<axt1->getY()<<endl;
+        x = axt1->getX();
+        fout.write((char*)&x, sizeof(x));
+        y = axt1->getY();
+        fout.write((char*)&y, sizeof(y));
+        // fout<<axt2->getX()<<endl;
+        // fout<<axt2->getY()<<endl;
+        x = axt2->getX();
+        fout.write((char*)&x, sizeof(x));
+        y = axt2->getY();
+        fout.write((char*)&y, sizeof(y));        
+        // fout<<axh1->getX()<<endl;
+        // fout<<axh1->getY()<<endl;
+        x = axh1->getX();
+        fout.write((char*)&x, sizeof(x));
+        y = axh1->getY();
+        fout.write((char*)&y, sizeof(y));        
+        // fout<<axh2->getX()<<endl;
+        // fout<<axh2->getY()<<endl;
+        x = axh2->getX();
+        fout.write((char*)&x, sizeof(x));
+        y = axh2->getY();
+        fout.write((char*)&y, sizeof(y));         
+        // fout<<akl1->getX()<<endl;
+        // fout<<akl1->getY()<<endl;
+        x = akl1->getX();
+        fout.write((char*)&x, sizeof(x));
+        y = akl1->getY();
+        fout.write((char*)&y, sizeof(y));          
+        // fout<<akl2->getX()<<endl;
+        // fout<<akl2->getY()<<endl;
+        x = akl2->getX();
+        fout.write((char*)&x, sizeof(x));
+        y = akl2->getY();
+        fout.write((char*)&y, sizeof(y));            
+        // fout<<ac1->getX()<<endl;
+        // fout<<ac1->getY()<<endl;
+        x = ac1->getX();
+        fout.write((char*)&x, sizeof(x));
+        y = ac1->getY();
+        fout.write((char*)&y, sizeof(y));         
+        // fout<<ac2->getX()<<endl;
+        // fout<<ac2->getY()<<endl;
+        x = ac2->getX();
+        fout.write((char*)&x, sizeof(x));
+        y = ac2->getY();
+        fout.write((char*)&y, sizeof(y));         
+        // fout<<cn.getX()<<endl;
+        // fout<<cn.getY()<<endl;
+        x = cn.getX();
+        fout.write((char*)&x, sizeof(x));
+        y = cn.getY();
+        fout.write((char*)&y, sizeof(y));           
+        // fout << adxh1.getstate() << endl;
+        // fout << adxh1.getcountingTime() << endl;
+        // fout << adxh1.gettimeInterval() << endl;
+        state = adxh1.getstate();
+        fout.write((char*)&state, sizeof(state));
+        countingTime = adxh1.getcountingTime();
+        fout.write((char*)&countingTime, sizeof(countingTime));
+        timeInterval = adxh1.gettimeInterval();
+        fout.write((char*)&timeInterval, sizeof(timeInterval));
+        // fout << adxh2.getstate() << endl;
+        // fout << adxh2.getcountingTime() << endl;
+        // fout << adxh2.gettimeInterval() << endl;
+        state = adxh2.getstate();
+        fout.write((char*)&state, sizeof(state));
+        countingTime = adxh2.getcountingTime();
+        fout.write((char*)&countingTime, sizeof(countingTime));
+        timeInterval = adxh2.gettimeInterval();
+        fout.write((char*)&timeInterval, sizeof(timeInterval));
+        // fout << adxt1.getstate() << endl;
+        // fout << adxt1.getcountingTime() << endl;
+        // fout << adxt1.gettimeInterval() << endl;
+        state = adxt1.getstate();
+        fout.write((char*)&state, sizeof(state));
+        countingTime = adxt1.getcountingTime();
+        fout.write((char*)&countingTime, sizeof(countingTime));
+        timeInterval = adxt1.gettimeInterval();
+        fout.write((char*)&timeInterval, sizeof(timeInterval));
+        // fout << adxt2.getstate() << endl;
+        // fout << adxt2.getcountingTime() << endl;
+        // fout << adxt2.gettimeInterval() << endl;
+        state = adxt2.getstate();
+        fout.write((char*)&state, sizeof(state));
+        countingTime = adxt2.getcountingTime();
+        fout.write((char*)&countingTime, sizeof(countingTime));
+        timeInterval = adxt2.gettimeInterval();
+        fout.write((char*)&timeInterval, sizeof(timeInterval));        
     }
     fout.close();
+}
+
+bool* CGAME::getSaveSlot() {
+    return b;
+}
+
+void CGAME::setSaveSlot(int s) {
+    b[s] = true;
 }
 
 void CGAME::pauseGame(HANDLE t) {
@@ -374,6 +539,20 @@ bool CGAME::nextLevel() {
         resetGame();
         return true;
     }
+}
+
+void CGAME::playDeathAnimation() {
+    Sleep(1300);
+    for (int i = 0; i <= 12; i++) {
+        cn.Up(1);
+        Sleep(80 - 6 * i);
+    }
+    Sleep(100);
+    for (int i = 0; i <= 27; i++) {
+        cn.Down(1);
+        Sleep(max(80 - 4 * i, 2));
+    }
+    cn.deDraw();
 }
 
 // -------------------------------

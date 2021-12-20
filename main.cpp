@@ -22,21 +22,16 @@ bool CRASH = false;
 bool PAUSE = false;
 bool PLAYSOUND = false;
 char MOVING = ' ';
-bool ISLOAD= false;
+bool FIRST = true;
 Menu MENU;
 
 void SubThread() {
     while (IN_GAME) { // Still in the menu
-        bool FIRST = true;
         while (IS_RUNNING) { // Still in the game
             if (PAUSE) continue;
             if (FIRST) { // Draw for first time
                 cg.resetGame();
                 FIRST = false;
-                if(ISLOAD){
-                    ISLOAD=false;
-                    cg.loadGame();
-                }
             }
             if (MOVING != ' ')
                 cg.updatePosPeople(MOVING);
@@ -53,8 +48,6 @@ void SubThread() {
                 IS_RUNNING = false;
                 CRASH = true;
                 break;
-
-                // Impact then playing sound and stuff    
             }
             
             if (cg.isFinish()) { // Cross the finish line
@@ -62,20 +55,18 @@ void SubThread() {
                     IS_RUNNING = false;
                     break;
                 }
-                else
-                    FIRST = true;
             }
             //Sleep(100);
         }    
-        FIRST = true;
     }
 }
 
 int main() {
-    //cg.testSprite();
     int temp;
     FixConsoleWindow();
     hideCursor();
+
+    cg.loadData();    
 
     thread t1(SubThread); // Create a subthread for updating position
 
@@ -92,13 +83,19 @@ int main() {
         int temp = MENU.updateChoice();
         if (temp == 0) { // Start new game
             cg.startGame();
+            FIRST = true;
             IS_RUNNING = true;
         }
         else if (temp == 1) { // Load game file
-            // To be added...
-            cg.startGame();
-            IS_RUNNING = true;
-            ISLOAD = true;
+            int slot = MENU.drawAndUpdateSave(cg.getSaveSlot());
+            // cg.getSaveSlot() is an array with 3 element
+            // cg.getSaveSlot()[i] is the i'th element
+            if (cg.getSaveSlot()[slot]) {
+                FIRST = false; // already played the game
+                cg.loadGame(slot);
+                cg.startGame();
+                IS_RUNNING = true;
+            }
         }
         else if (temp == 2) { // Do some settings
             MENU.drawSettings();
@@ -131,23 +128,76 @@ int main() {
 
                     TextColor(7);
                     system("cls");
-                    cg.getPeople().Draw();
-                    cg.drawGuide();
-                    PAUSE = false;
 
                     if (pChoice == 0) {
                         cg.resumeGame((HANDLE)t1.native_handle());
+                        cg.getPeople().Draw();
+                        cg.drawGuide();
+                        PAUSE = false;
                     }
                     else {
                         IS_RUNNING = false;
                         cg.exitGame((HANDLE)t1.native_handle());
-                        system("cls");
+                        //system("cls");
+                        PAUSE = false;
                         break;                        
                     }
                 }
-                else if (temp == 'l') {
+                else if (temp == 'l') { // Could change to choose option from pause menu
                     // Show up the save slots
-                    cg.saveGame();
+                    cg.pauseGame((HANDLE)t1.native_handle());
+                    PAUSE = true;
+                    Sleep(100); // Add buffer for showing up save menu
+
+                    TextColor(7);
+                    int slot = MENU.drawAndUpdateSave(cg.getSaveSlot());
+                    cg.saveGame(slot);
+                    cg.setSaveSlot(slot);                    
+
+                    system("cls");     
+                    TextColor(7);
+
+                    // Ask the user to continue or not
+                    GotoXY(52, 4);
+                    cout << "SAVE COMPLETE!!";
+                    GotoXY(35, 6);
+                    cout << "Would you like to continue or return to main menu?";
+                    MENU.drawPauseScreen();
+                    int pChoice = MENU.updatePause();
+
+                    TextColor(7);
+                    system("cls");
+
+                    if (pChoice == 0) {
+                        cg.resumeGame((HANDLE)t1.native_handle());
+                        cg.getPeople().Draw();
+                        cg.drawGuide();
+                        PAUSE = false;
+                    }
+                    else {
+                        IS_RUNNING = false;
+                        cg.exitGame((HANDLE)t1.native_handle());
+                        //system("cls");
+                        PAUSE = false;
+                        break;                        
+                    }
+                }
+                else if (temp == 't') {
+                    // Show up the load menu
+                    cg.pauseGame((HANDLE)t1.native_handle());
+                    PAUSE = true;
+                    Sleep(100); // Add buffer for showing up load menu
+
+                    TextColor(7);
+                    int slot = MENU.drawAndUpdateSave(cg.getSaveSlot());
+                    // cg.getSaveSlot() is an array with 3 element
+                    // cg.getSaveSlot()[i] is the i'th element
+                    system("cls");
+
+                    if (cg.getSaveSlot()[slot])
+                        cg.loadGame(slot);
+
+                    PAUSE = false;                        
                 }
                 else {
                     // Update movement
@@ -158,8 +208,10 @@ int main() {
             if (CRASH) {
                 // Impact here
                 Sleep(2000);
+                // Need to add animation here
                 if (PLAYSOUND)
-                    playSound("sounds/super-mario-death-sound-sound-effect.wav");
+                    playSound("sounds/super-mario-death-sound-sound-effect.wav");                
+                cg.playDeathAnimation();                 
                 //system("cls");
                 while(1) {
                     for (int x = 38; x <= 78; x++)
@@ -175,9 +227,11 @@ int main() {
                     int temp = _getch();
                     if (temp == KEY_ENTER) break;
                 }        
+                cg.setLevel(1);
                 CRASH = false;
             }
             if (cg.getLevel() == 5) {
+                // Finish the game
                 //system("cls");
                 if (PLAYSOUND)
                     playSound("sounds/winning_sound.wav");
@@ -200,5 +254,7 @@ int main() {
         }
     }
     t1.join();
+
+    cg.saveData();  
     return 0;
 }

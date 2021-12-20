@@ -118,6 +118,13 @@ CGAME::~CGAME() {
 }
 
 void CGAME::loadData() {
+    ifstream fin("SaveState.txt");
+    if (fin.is_open()) {
+        for (int i = 0; i < 3; i++)
+            fin >> b[i];
+    }
+    fin.close();
+
     char c = 254;
 
     GotoXY(60, 9);
@@ -160,6 +167,15 @@ void CGAME::loadData() {
     cout << "Loading complete, press any key to continue.";
     _getch();
     system("cls");
+}
+
+void CGAME::saveData() {
+    ofstream fout("SaveState.txt");
+    if (fout.is_open()) {
+        for (int i = 0; i < 3; i++)
+            fout << b[i] << ' ';
+    }
+    fout.close();        
 }
 
 CPEOPLE CGAME::getPeople() {

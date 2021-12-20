@@ -254,5 +254,7 @@ int main() {
         }
     }
     t1.join();
+
+    cg.saveData();  
     return 0;
 }

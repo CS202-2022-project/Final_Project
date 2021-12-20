@@ -22,6 +22,7 @@ class CGAME{
         ~CGAME(); // Release the memory
 
         void loadData();
+        void saveData();
 
         CPEOPLE getPeople(); // Get people info
         //CVEHICLE* getVehicle(); // Get vehicle info

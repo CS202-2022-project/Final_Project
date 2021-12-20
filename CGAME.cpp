@@ -1,4 +1,5 @@
 #include "CGAME.h"
+#include "conio.h"
 
 CGAME::CGAME() {
     levels = 1;
@@ -114,6 +115,51 @@ CGAME::~CGAME() {
     delete axh1, axh2;
     delete ac1, ac2;
     delete akl1, akl2;
+}
+
+void CGAME::loadData() {
+    char c = 254;
+
+    GotoXY(60, 9);
+    cout << "0%";
+    drawBoard(30, 12, 90, 14);
+
+    Sleep(500);
+    GotoXY(60, 9);
+    cout << "25%";
+    for (int x = 31; x <= 45; x++) {
+        GotoXY(x, 13);
+        cout << c;
+    }
+
+    Sleep(500);
+    GotoXY(60, 9);
+    cout << "50%";
+    for (int x = 46; x <= 60; x++) {
+        GotoXY(x, 13);
+        cout << c;
+    }  
+
+    Sleep(500);
+    GotoXY(60, 9);
+    cout << "75%";
+    for (int x = 61; x <= 75; x++) {
+        GotoXY(x, 13);
+        cout << c;
+    } 
+
+    Sleep(500);
+    GotoXY(60, 9);
+    cout << "100%";
+    for (int x = 76; x <= 89; x++) {
+        GotoXY(x, 13);
+        cout << c;
+    }     
+
+    GotoXY(40, 16);
+    cout << "Loading complete, press any key to continue.";
+    _getch();
+    system("cls");
 }
 
 CPEOPLE CGAME::getPeople() {

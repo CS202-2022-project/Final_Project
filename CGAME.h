@@ -20,6 +20,9 @@ class CGAME{
         CGAME(); //Prepare data
         void drawGame(); //Draw game to screen after getting data
         ~CGAME(); // Release the memory
+
+        void loadData();
+
         CPEOPLE getPeople(); // Get people info
         //CVEHICLE* getVehicle(); // Get vehicle info
         //CANIMAL* getAnimal(); // Get animal info

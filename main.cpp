@@ -66,6 +66,8 @@ int main() {
     FixConsoleWindow();
     hideCursor();
 
+    cg.loadData();    
+
     thread t1(SubThread); // Create a subthread for updating position
 
     while(IN_GAME){
@@ -149,15 +151,53 @@ int main() {
 
                     TextColor(7);
                     int slot = MENU.drawAndUpdateSave(cg.getSaveSlot());
+                    cg.saveGame(slot);
+                    cg.setSaveSlot(slot);                    
+
+                    system("cls");     
+                    TextColor(7);
+
+                    // Ask the user to continue or not
+                    GotoXY(52, 4);
+                    cout << "SAVE COMPLETE!!";
+                    GotoXY(35, 6);
+                    cout << "Would you like to continue or return to main menu?";
+                    MENU.drawPauseScreen();
+                    int pChoice = MENU.updatePause();
 
                     TextColor(7);
-                    system("cls");     
-                    cg.getPeople().Draw();
-                    cg.drawGuide();
-                    PAUSE = false;
+                    system("cls");
 
-                    cg.saveGame(slot);
-                    cg.setSaveSlot(slot);
+                    if (pChoice == 0) {
+                        cg.resumeGame((HANDLE)t1.native_handle());
+                        cg.getPeople().Draw();
+                        cg.drawGuide();
+                        PAUSE = false;
+                    }
+                    else {
+                        IS_RUNNING = false;
+                        cg.exitGame((HANDLE)t1.native_handle());
+                        //system("cls");
+                        PAUSE = false;
+                        break;                        
+                    }
+                }
+                else if (temp == 't') {
+                    // Show up the load menu
+                    cg.pauseGame((HANDLE)t1.native_handle());
+                    PAUSE = true;
+                    Sleep(100); // Add buffer for showing up load menu
+
+                    TextColor(7);
+                    int slot = MENU.drawAndUpdateSave(cg.getSaveSlot());
+                    // cg.getSaveSlot() is an array with 3 element
+                    // cg.getSaveSlot()[i] is the i'th element
+                    system("cls");
+
+                    if (cg.getSaveSlot()[slot])
+                        cg.loadGame(slot);
+
+                    PAUSE = false;                        
                 }
                 else {
                     // Update movement
@@ -187,6 +227,7 @@ int main() {
                     int temp = _getch();
                     if (temp == KEY_ENTER) break;
                 }        
+                cg.setLevel(1);
                 CRASH = false;
             }
             if (cg.getLevel() == 5) {

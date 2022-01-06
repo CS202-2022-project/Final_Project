@@ -15,10 +15,10 @@ protected:
 public:
 	CANIMAL();
     void Move(int x, int y);
-	int getX();
-	int getY();
-	void deDraw();
-	virtual bool Up(int) =0;
+	int getX(); //This is to get the current position of the animal on the screen in terms of horizon
+ 	int getY(); // This is to get the current position of the animal on the screen in terms of vertical
+	void deDraw(); // This is the function to delete the remained draw 
+	virtual bool Up(int) =0;  
 	virtual bool Down(int) =0;
 	virtual void tell() =0;
 	virtual void Draw()=0;

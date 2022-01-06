@@ -19,14 +19,14 @@ private:
 public:
     CTRAFFIC_LIGHT();
     CTRAFFIC_LIGHT(int x, int y , int timeInterval);
-    void increaseTime();
-    void draw(char);
-    void updateState(char ch);
-    bool isRed();
-    int getcountingTime();
-    int gettimeInterval();
-    int getstate();
-    void updateLoadTraffic(int, int, int);
+    void increaseTime(); //This is the function to increase the time of shifting color of traffic light
+    void draw(char); //This is to draw up the traffic light onto the screen
+    void updateState(char ch); //This is to update the current state of the traffic light
+    bool isRed(); // This is to check if the traffic light is red or not currently
+    int getcountingTime(); // This is to get the counting time
+    int gettimeInterval(); // This is the function to get the time interval
+    int getstate(); //This is the function to get the current state
+    void updateLoadTraffic(int, int, int); // This is the function to update the traffic light
 };
 
 #endif

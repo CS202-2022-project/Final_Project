@@ -29,6 +29,7 @@ if (mY - step < Y_START) return false;
 	Draw();
     return true;
 }
+//This is 
 bool CDINAUSOR::Down(int step){
 if (mY + step + 2 > Y_END) return false;
 	GotoXY(mX, mY);

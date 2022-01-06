@@ -21,34 +21,34 @@ class CGAME{
         void drawGame(); //Draw game to screen after getting data
         ~CGAME(); // Release the memory
 
-        void loadData();
-        void saveData();
+        void loadData(); //This is for loading data for the game
+        void saveData(); // This is for saving data for the game
 
-        CPEOPLE getPeople(); // Get people info
-        //CVEHICLE* getVehicle(); // Get vehicle info
-        //CANIMAL* getAnimal(); // Get animal info
-        void drawGuide(); // Draw Instructions
-        void resetGame(); // Reset all data to the initial value
-        void exitGame(HANDLE t); // Exit from Thread
-        void startGame(); // Start the game
-        void loadGame(int slot); // Load the game
-        void saveGame(int slot); // Save the game
-        bool* getSaveSlot(); // Return the state of the save slots
-        void setSaveSlot(int s); // Set the state of the save slot
-        void pauseGame(HANDLE t); // Pause the Thread
-        void resumeGame(HANDLE t); // Resume the Thread
-        void updatePosPeople(char c); // Movement control
-        void updatePosVehicle(); // Change vehicle Position
-        void updatePosAnimal(); // Change animal position
-        void updateLight(); // Update traffic light
+        CPEOPLE getPeople(); // This is the function to get data of people
+        //CVEHICLE* getVehicle(); // Get data of the vehicle
+        //CANIMAL* getAnimal(); // Get data of animal 
+        void drawGuide(); // This is the function to draw up the instruction
+        void resetGame(); // This is the function to reset the game
+        void exitGame(HANDLE t); // This is the function to exit from the thread
+        void startGame(); // This is the function to start the new game
+        void loadGame(int slot); // This is the function to load the game
+        void saveGame(int slot); // This is  the function to save the game in a particular slot
+        bool* getSaveSlot(); // This is the function to return the state of the slot
+        void setSaveSlot(int s); // This is the function to set the saved slot
+        void pauseGame(HANDLE t); // This is the function to pause the thread
+        void resumeGame(HANDLE t); // This is the fucntion to resume the thread
+        void updatePosPeople(char c); // This is the function to update the position of people
+        void updatePosVehicle(); // This is the function to update position of the vehicle
+        void updatePosAnimal(); // This is the function to update the position of the animal
+        void updateLight(); // This is the function to update the traffic light
 
         bool isImpact(bool PLAYSOUND); // Check if the person is impacting other objects
-        int getLevel(); // return the current level
-        void setLevel(int x); // set the current level
-        bool isFinish(); // Check if the person crossed the finish line
-        bool nextLevel(); // Go to the next level
-        void playDeathAnimation(); // Play death animation
-        void testSprite(); // Just for testing 
+        int getLevel(); // this is the function to get the current level
+        void setLevel(int x); // this is the function to set the current level
+        bool isFinish(); // This is the fucntion to check if it's finished or not
+        bool nextLevel(); // This is the function to shift to the next level
+        void playDeathAnimation(); // This is the function to play the death animation
+        void testSprite(); // Just for test
     protected:
         unsigned int Cycle = 0;
         int levels = 1;

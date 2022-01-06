@@ -5,11 +5,11 @@
 class CBIRD :public CANIMAL {
 public:
 	CBIRD();
-	void Draw();
-	bool Up(int);
-	bool Down(int);
-	void tell();
-	int getWidth();
-	int getHeight();
-};
+	void Draw(); //This is for the sound of bird
+	bool Up(int); // This is to draw up the bird on the screen
+	bool Down(int); // This is for the moving up of the bird
+	void tell(); //This is for the moving down of the bird
+	int getWidth();  // This is to get width of the bird's position
+	int getHeight();// This is to get height of the bird's position
+}; 
 #endif // !_CBIRD_H_

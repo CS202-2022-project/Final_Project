@@ -244,10 +244,10 @@ void CGAME::loadGame(int slot) {
         if(!fin.eof())
         {
         system("cls");
-        drawGuide();
         //fin>>levels;
         fin.read((char*)&levels, sizeof(levels));
         //fin>>x;fin>>y;
+        drawGuide();
         fin.read((char*)&x, sizeof(x));
         fin.read((char*)&y, sizeof(y));
         axt1->move(x,y);

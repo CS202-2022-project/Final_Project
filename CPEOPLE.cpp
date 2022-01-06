@@ -68,39 +68,22 @@ void CPEOPLE::Down(int step) {
 // Lonk >:(
 
 bool CPEOPLE::isImpact(CVEHICLE* v) {
-	for (int i = 0; i < sprite.size(); i++)
-		for (int j = 0; j < sprite[i].size(); j++)
-			for (int x = 0; x < v -> sprite.size(); x++)
-				for (int y = 0; y < v -> sprite[x].size(); y++)
-					if (mX + j == v->mX + y && mY + i == v->mY + x && sprite[i][j] != ' ' && v -> sprite[x][y] != ' ')
-						return true;
-	/*
-	if (this->mX+4 <= (v->getX() + v->getWidth() -1) && this->mX+4 >=v->getX() ||		//check if step in the lane
-		(this->mX >= v->getX() && this->mX <= (v->getX() + v->getWidth() - 1)))		//check if still in the lane
+	if (this->mX+4 <= (v->getX() + v->getWidth() -1) && this->mX+4 >=v->getX() ||	//check if step in the lane
+		(this->mX >= v->getX() && this->mX <= (v->getX() + v->getWidth() - 1)))	//check if still in the lane
 	{	
-			if (this->mY >= v->getY() && this->mY <= (v->getY() + v->getHeight() - 1) ||			//head got hit
-				(this->mY + 2 >= v->getY() && this->mY + 2 <= (v->getY() + v->getHeight() - 1)))	//foot got hit
+			if (this->mY >= v->getY() && this->mY <= (v->getY() + v->getHeight() - 1) ||		//head got hit
+				(this->mY + 2 >= v->getY() && this->mY + 2 <= (v->getY() + v->getHeight() - 1)))  //foot got hit
 				return true;
 	}
-	*/
-	return false;
 }
 bool CPEOPLE::isImpact(CANIMAL* v) {
-	for (int i = 0; i < sprite.size(); i++)
-		for (int j = 0; j < sprite[i].size(); j++)
-			for (int x = 0; x < v -> sprite.size(); x++)
-				for (int y = 0; y < v -> sprite[x].size(); y++)
-					if (mX + j == v->mX + y && mY + i == v->mY + x && sprite[i][j] != ' ' && v -> sprite[x][y] != ' ')
-						return true;
-	/*
 	if (this->mX + 4 <= (v->getX() + v->getWidth() - 1) && this->mX + 4 >= v->getX() ||		//check if step in the lane
-		(this->mX >= v->getX() && this->mX <= (v->getX() + v->getWidth() - 1)))				//check if still in the lane
+		(this->mX >= v->getX() && this->mX <= (v->getX() + v->getWidth() - 1)))		//check if still in the lane
 	{
-		if (this->mY >= v->getY() && this->mY <= (v->getY() + v->getHeight() - 1) ||				//head gets hit
-			(this->mY + 2 >= v->getY() && this->mY + 2 <= (v->getY() + v->getHeight() - 1)))		//foot gets hit
+		if (this->mY >= v->getY() && this->mY <= (v->getY() + v->getHeight() - 1) ||			//head gets hit
+			(this->mY + 2 >= v->getY() && this->mY + 2 <= (v->getY() + v->getHeight() - 1)))	//foot gets hit
 			return true;
 	}
-	*/
 	return false;
 }
 
